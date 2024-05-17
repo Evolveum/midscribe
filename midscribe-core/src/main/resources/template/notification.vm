@@ -1,3 +1,121 @@
-$object.generalNotifier
+#macro(serializeExpression $notifier)
+#set($filter = $notifier.expressionFilter.get(0).getExpressionEvaluator().get(0).getValue())
+#set($recipient = $notifier.recipientExpression.get(0).getExpressionEvaluator().get(0).getValue())
+#set($subject = $notifier.subjectExpression.getExpressionEvaluator().get(0).getValue())
+#set($body = $notifier.bodyExpression.getExpressionEvaluator().get(0).getValue())
+
+[source,xml,indent=0,subs="verbatim,attributes",role="primary"]
+.Expression filter
+----
+$utils.stripIndent($processor.serialize($filter))
+----
+
+#if($recipient)
+[source,xml,indent=0,subs="verbatim,attributes",role="secondary"]
+.Recipient expression
+----
+$utils.stripIndent($processor.serialize($recipient))
+----
+#end
+
+#if($subject)
+[source,xml,indent=0,subs="verbatim,attributes",role="secondary"]
+.Subject expression
+----
+$utils.stripIndent($processor.serialize($subject))
+----
+#end
+
+#if($body)
+[source,xml,indent=0,subs="verbatim,attributes",role="secondary"]
+.Body expression
+----
+$utils.stripIndent($processor.serialize($body))
+----
+#end
 
 
+#end
+
+#foreach($handler in $objects)
+=== $!processor.translator($handler.name)
+
+#if($handler.simpleUserNotifier)
+
+[.underline]#simpleUserNotifier#
+#serializeExpression($handler.getSimpleUserNotifier().get(0))
+
+#elseif($handler.simpleWorkflowNotifier)
+[.underline]#simpleWorkflowNotifier#
+#serializeExpression($handler.getSimpleWorkflowNotifier().get(0))
+
+#elseif($handler.simpleCampaignNotifier)
+[.underline]#simpleCampaignNotifier#
+#serializeExpression($handler.getSimpleCampaignNotifier().get(0))
+
+#elseif($handler.simpleCampaignStageNotifier)
+[.underline]#simpleCampaignStageNotifier#
+#serializeExpression($handler.getSimpleCampaignStageNotifier().get(0))
+
+#elseif($handler.simpleCaseManagementNotifier)
+[.underline]#simpleCaseManagementNotifier#
+#serializeExpression($handler.getSimpleCaseManagementNotifier().get(0))
+
+#elseif($handler.simpleFocalObjectNotifier)
+[.underline]#simpleFocalObjectNotifier#
+#serializeExpression($handler.getSimpleFocalObjectNotifier().get(0))
+
+#elseif($handler.simplePolicyRuleNotifier)
+[.underline]#simplePolicyRuleNotifier#
+#serializeExpression($handler.getSimplePolicyRuleNotifier().get(0))
+
+#elseif($handler.simpleReportNotifier)
+[.underline]#simpleReportNotifier#
+#serializeExpression($handler.getSimpleReportNotifier().get(0))
+
+#elseif($handler.simpleResourceObjectNotifier)
+[.underline]#simpleResourceObjectNotifier#
+#serializeExpression($handler.getSimpleResourceObjectNotifier().get(0))
+
+#elseif($handler.simpleReviewerNotifier)
+[.underline]#simpleReviewerNotifier#
+#serializeExpression($handler.getSimpleReviewerNotifier().get(0))
+
+#elseif($handler.simpleTaskNotifier)
+[.underline]#simpleTaskNotifier#
+#serializeExpression($handler.getSimpleTaskNotifier().get(0))
+
+#elseif($handler.timeValidityNotifier)
+[.underline]#timeValidityNotifier#
+#serializeExpression($handler.getTimeValidityNotifier().get(0))
+
+#elseif($handler.userPasswordNotifier)
+[.underline]#userPasswordNotifier#
+#serializeExpression($handler.getUserPasswordNotifier().get(0))
+
+#elseif($handler.userRegistrationNotifier)
+[.underline]#userRegistrationNotifier#
+#serializeExpression($handler.getUserRegistrationNotifier().get(0))
+
+#elseif($handler.accountActivationNotifier)
+[.underline]#accountActivationNotifier#
+#serializeExpression($handler.getAccountActivationNotifier().get(0))
+
+#elseif($handler.accountPasswordNotifier)
+[.underline]#accountPasswordNotifier#
+#serializeExpression($handler.getAccountPasswordNotifier().get(0))
+
+#elseif($handler.customNotifier)
+[.underline]#customNotifier#
+#serializeExpression($handler.getCustomNotifier().get(0))
+
+#elseif($handler.generalNotifier)
+[.underline]#generalNotifier#
+#serializeExpression($handler.getGeneralNotifier().get(0))
+
+#elseif($handler.passwordResetNotifier)
+[.underline]#passwordResetNotifier#
+#serializeExpression($handler.getPasswordResetNotifier().get(0))
+
+#end
+#end

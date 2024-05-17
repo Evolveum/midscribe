@@ -1,9 +1,8 @@
 ## FUNCTION LIBRARIES
 
 #set($sysConfig=$processor.loadSystemConfiguration())
-
+$sysConfig
 #foreach($sys in $sysConfig)
-
 
 #if(!$sys.isEmpty())
 
@@ -17,19 +16,67 @@
 |Handler name
 |Handler type
 |Transport
+
 #foreach($handler in $objects)
 
-
-|$handler.name
+|$!processor.translator($handler.name)
 #if($handler.simpleUserNotifier)
 |simpleUserNotifier
-|$handler.getSimpleUserNotifier().get(0).transport
+|$!processor.translator($handler.getSimpleUserNotifier().get(0).transport)
 #elseif($handler.simpleWorkflowNotifier)
 |simpleWorkflowNotifier
-|$handler.simpleWorkflowNotifier.transport
+|$!processor.translator($handler.getSimpleWorkflowNotifier().get(0).transport)
 #elseif($handler.simpleCampaignNotifier)
 |simpleCampaignNotifier
-|$handler.simpleCampaignNotifier.transport
+|$!processor.translator($handler.getSimpleCampaignNotifier().get(0).transport)
+#elseif($handler.simpleCampaignStageNotifier)
+|simpleCampaignStageNotifier
+|$!processor.translator($handler.getSimpleCampaignStageNotifier().get(0).transport)
+#elseif($handler.simpleCaseManagementNotifier)
+|simpleCaseManagementNotifier
+|$!processor.translator($handler.getSimpleCaseManagementNotifier().get(0).transport)
+#elseif($handler.simpleFocalObjectNotifier)
+|simpleFocalObjectNotifier
+|$!processor.translator($handler.getSimpleFocalObjectNotifier().get(0).transport)
+#elseif($handler.simplePolicyRuleNotifier)
+|simplePolicyRuleNotifier
+|$!processor.translator($handler.getSimplePolicyRuleNotifier().get(0).transport)
+#elseif($handler.simpleReportNotifier)
+|simpleReportNotifier
+|$!processor.translator($handler.getSimpleReportNotifier().get(0).transport)
+#elseif($handler.simpleResourceObjectNotifier)
+|simpleResourceObjectNotifier
+|$!processor.translator($handler.getSimpleResourceObjectNotifier().get(0).transport)
+#elseif($handler.simpleReviewerNotifier)
+|simpleReviewerNotifier
+|$!processor.translator($handler.getSimpleReviewerNotifier().get(0).transport)
+#elseif($handler.simpleTaskNotifier)
+|simpleTaskNotifier
+|$!processor.translator($handler.getSimpleTaskNotifier().get(0).transport)
+#elseif($handler.timeValidityNotifier)
+|timeValidityNotifier
+|$!processor.translator($handler.getTimeValidityNotifier().get(0).transport)
+#elseif($handler.userPasswordNotifier)
+|userPasswordNotifier
+|$!processor.translator($handler.getUserPasswordNotifier().get(0).transport)
+#elseif($handler.userRegistrationNotifier)
+|userRegistrationNotifier
+|$!processor.translator($handler.getUserRegistrationNotifier().get(0).transport)
+#elseif($handler.accountActivationNotifier)
+|accountActivationNotifier
+|$!processor.translator($handler.getAccountActivationNotifier().get(0).transport)
+#elseif($handler.accountPasswordNotifier)
+|accountPasswordNotifier
+|$!processor.translator($handler.getAccountPasswordNotifier().get(0).transport)
+#elseif($handler.customNotifier)
+|customNotifier
+|$!processor.translator($handler.getCustomNotifier().get(0).transport)
+#elseif($handler.generalNotifier)
+|generalNotifier
+|$!processor.translator($handler.getGeneralNotifier().get(0).transport)
+#elseif($handler.passwordResetNotifier)
+|passwordResetNotifier
+|$!processor.translator($handler.getPasswordResetNotifier().get(0).transport)
 #else
 |OtherNotifier
 #end
@@ -40,9 +87,17 @@
 
 
 
-#foreach($object in $sys.getNotificationConfiguration().getHandler())
+#if($objects && $processor.getProperty("project.expressionEnables") == "true")
 #parse("/template/notification.vm")
 #end
 
+
+=== Message transport configuration
+
+#*#set($transportConfig=$sys.getMessageTransportConfiguration())
+$sys
+#if($transportConfig)
+$transportConfig
+#end*#
 #end
 #end

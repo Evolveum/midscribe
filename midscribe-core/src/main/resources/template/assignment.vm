@@ -21,6 +21,7 @@ $!processor.translator($!object.documentation)
 
 |$!processor.translator($object.targetRef.getRelation())
 
+#if($!object.description && $!object.subtype != "[]")
 |**Parameter**
 |**Value**
 |**Parameter**
@@ -30,6 +31,9 @@ $!processor.translator($!object.documentation)
 |$!processor.translator($!object.description)
 |**Subtype**
 |$!processor.translator($!object.subtype)
+#end
+
+
 
 |===
 
@@ -56,16 +60,18 @@ $!processor.translator($!object.documentation)
 
 |$!processor.translator($object.targetRef.getRelation())
 
+#if($!object.description && $!object.subtype != "[]")
 |**Parameter**
 |**Value**
 |**Parameter**
 |**Value**
+
 
 |**Description**
 |$!processor.translator($!object.description)
 |**Subtype**
 |$!processor.translator($!object.subtype)
-
+#end
 |===
 
 #end
