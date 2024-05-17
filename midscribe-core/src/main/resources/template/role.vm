@@ -1,6 +1,47 @@
-=== $!utils.getOrig($object.getName())
+=== $!processor.translator($!utils.getOrig($object.getName()))
 
-$!object.getDescription()
+$!processor.translator($!object.getDescription())
 
-$!utils.stripIndent($object.getDocumentation())
+$!processor.translator($!utils.stripIndent($object.getDocumentation()))
+
+[cols=2,options=header]
+|===
+|Parameter
+|Value
+
+|Identifier
+#if ($object.identifier)
+|$!processor.translator($object.identifier)
+#else
+| --not specified--
+#end
+
+|Display name
+#if ($object.displayName)
+|$!processor.translator($object.displayName)
+#else
+| --not specified--
+#end
+
+
+|Indestructable
+#if ($object.indestructible)
+|$!processor.translator($object.indestructible)
+#else
+|false
+#end
+|===
+
+#if ($object.assignment)
+==== Assignments
+#set($objects = $object.assignment)
+#parse("/template/assignment.vm")
+#end
+#if ($object.inducement)
+==== Inducements
+#set($objects = $object.inducement)
+#parse("/template/inducement.vm")
+#end
+
+
 

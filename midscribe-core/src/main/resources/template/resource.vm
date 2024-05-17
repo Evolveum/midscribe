@@ -1,23 +1,29 @@
+=== $!processor.translator($!utils.getOrig($object.getName()))
 
-=== $!utils.getOrig($object.getName())
+$!processor.translator($!object.getDescription())
 
-$!object.getDescription()
-
-$!utils.stripIndent($object.getDocumentation())
+$!processor.translator($!utils.stripIndent($object.getDocumentation()))
 
 ==== Basic Information
 
 [discrete]
 ===== Connector
 
-#set($connector = $processor.getObject($object.getConnectorRef()))
+#set($connectorXNode = $object.getConnectorRef().getFilter().getFilterClauseXNode().get("equal").get("value"))
 
-Resource uses $!utils.getOrig($connector.getDisplayName()) connector. Artifact details:
+#set($connectorValue = $utils.findIndices($connectorXNode))
 
-* **Connector type:** $!connector.getConnectorType()
-* **Connector version:** $!connector.getConnectorVersion()
-* **Connector bundle:** $!connector.getConnectorBundle()
-* **Namespace:** $!connector.getNamespace()
+#if(!$connectorValue)
+    #set($connectorXNode = $object.getConnectorRef().getFilter().getFilterClauseXNode().get("and").get("equal").get(0))
+    #set($connectorValue = $utils.findIndices($connectorXNode))
+    #set($connectorXNode = $object.getConnectorRef().getFilter().getFilterClauseXNode().get("and").get("equal").get(1))
+    #set($connectorValueVersion = $utils.findIndices($connectorXNode))
+#end
+
+* **Connector type:**  $!processor.translator($!connectorValue)
+* **Connector version:** $!processor.translator($!connectorValueVersion)
+
+$object.schema.definition.xsd:schema
 
 [discrete]
 ===== Connector Configuration
@@ -29,9 +35,9 @@ Resource uses $!utils.getOrig($connector.getDisplayName()) connector. Artifact d
 |Description
 
 #foreach($attribute in $utils.getConnectorConfiguration($object))
-|$!attribute.getName()
-|$!attribute.getValue()
-|$!attribute.getDescription()
+|$!processor.translator($!attribute.getName())
+|$!processor.translator($!attribute.getValue())
+|$!processor.translator($!attribute.getDescription())
 
 #end
 |===
@@ -48,8 +54,8 @@ Resource uses $!utils.getOrig($connector.getDisplayName()) connector. Artifact d
 |Value
 
 #foreach($attribute in $handlersConfig)
-|$!attribute.getName()
-|$!attribute.getValue()
+|$!processor.translator($!attribute.getName())
+|$!processor.translator($!attribute.getValue())
 
 #end
 |===
@@ -80,23 +86,20 @@ Resource uses $!utils.getOrig($connector.getDisplayName()) connector. Artifact d
 ==== Object Types
 ##todo sort
 #foreach($type in $object.getSchemaHandling().getObjectType())
-===== $!utils.getNameOfObjectType($type)
+===== $!processor.translator($!utils.getNameOfObjectType($type))
 
-$!type.getDescription()
+$!processor.translator($!type.getDescription())
 
-$!type.getDocumentation()
+$!processor.translator($!type.getDocumentation())
 
-[cols=3,options=header]
+[cols=2,options=header]
 |===
 |Attribute
-|Type
 |Description
-##todo sort
 #foreach($attribute in $utils.sortAttributes($type.getAttribute()))
-|$!attribute.getRef().toString() #if ($attribute.getDisplayName()) ($!attribute.getDisplayName()) #end
-|
-|$!attribute.getDocumentation()
-$!attribute.getDescription()
+|$!processor.translator($!attribute.getRef().toString()) #if ($attribute.getDisplayName()) ($!processor.translator($!attribute.getDisplayName())) #end
+|$!processor.translator($!attribute.getDocumentation())
+$!processor.translator($!attribute.getDescription())
 
 #end
 |===
@@ -104,7 +107,7 @@ $!attribute.getDescription()
 ====== Attribute Details
 
 #foreach($attribute in $utils.sortAttributes($type.getAttribute()))
-*$!attribute.getRef().toString()* #if ($attribute.getDisplayName()) *($!attribute.getDisplayName())* #end
+*$!processor.translator($!attribute.getRef().toString())* #if ($attribute.getDisplayName()) *($!processor.translator($!attribute.getDisplayName()))* #end
 
 #if (!$attribute.getInbound().isEmpty())
 [.underline]#Inbounds#
@@ -123,15 +126,93 @@ $!attribute.getDescription()
 
 #if ($type.getCredentials())
 ====== Credentials
-##todo
+#if (!$type.getCredentials().getPassword().getInbound().isEmpty())
+[.underline]#Inbounds#
+
+#set($mappings = $type.getCredentials().getPassword().getInbound())
+#parse("/template/mappings.vm")
+#end
+
+#if ($type.getCredentials().getPassword().getOutbound())
+[.underline]#Outbound#
+
+#set($mappings = $type.getCredentials().getPassword().getOutbound())
+#parse("/template/mappings.vm")
+#end
 #end
 #if ($type.getActivation())
 ====== Activation
-##todo
+#if ($type.getActivation().getExistence())
+**Existence: **
+
+#if (!$type.getActivation().getExistence().getInbound().isEmpty())
+[.underline]#Inbounds#
+
+#set($mappings = $type.getActivation().getExistence().getInbound())
+#parse("/template/mappings.vm")
+#end
+
+#if ($type.getActivation().getExistence().getOutbound())
+[.underline]#Outbound#
+
+#set($mappings = $type.getActivation().getExistence().getOutbound())
+#parse("/template/mappings.vm")
+#end
+#end
+#if ($type.getActivation().getAdministrativeStatus())
+**Administrative status: **
+
+#if (!$type.getActivation().getAdministrativeStatus().getInbound().isEmpty())
+[.underline]#Inbounds#
+
+#set($mappings = $type.getActivation().getAdministrativeStatus().getInbound())
+#parse("/template/mappings.vm")
+#end
+
+#if ($type.getActivation().getAdministrativeStatus().getOutbound())
+[.underline]#Outbound#
+
+#set($mappings = $type.getActivation().getAdministrativeStatus().getOutbound())
+#parse("/template/mappings.vm")
+#end
+#end
+
 #end
 #if ($type.getAssociation())
 ====== Association
-##todo
+
+[cols=2,options=header]
+|===
+|Element
+|Value
+
+#foreach($association in $type.getAssociation())
+|ref
+|$!processor.translator($association.ref)
+
+|tolerant
+|$!processor.translator($association.tolerant)
+
+|kind
+|$!processor.translator($association.getKind())
+
+| intent
+#foreach($intent in $association.getIntent())
+|$!processor.translator($intent)
+#end
+
+|direction
+|$!processor.translator($association.getDirection())
+
+|associationAttribute
+|$!processor.translator($association.getAssociationAttribute())
+
+|valueAttribute
+|$!processor.translator($association.getValueAttribute())
+
+|===
+#end
+
 #end
 #end
 

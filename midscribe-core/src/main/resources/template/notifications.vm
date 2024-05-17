@@ -1,0 +1,48 @@
+## FUNCTION LIBRARIES
+
+#set($sysConfig=$processor.loadSystemConfiguration())
+
+#foreach($sys in $sysConfig)
+
+
+#if(!$sys.isEmpty())
+
+== Notifications
+
+#set($objects=$sys.getNotificationConfiguration().getHandler())
+#if($objects)
+
+[cols=3,options=header]
+|===
+|Handler name
+|Handler type
+|Transport
+#foreach($handler in $objects)
+
+
+|$handler.name
+#if($handler.simpleUserNotifier)
+|simpleUserNotifier
+|$handler.getSimpleUserNotifier().get(0).transport
+#elseif($handler.simpleWorkflowNotifier)
+|simpleWorkflowNotifier
+|$handler.simpleWorkflowNotifier.transport
+#elseif($handler.simpleCampaignNotifier)
+|simpleCampaignNotifier
+|$handler.simpleCampaignNotifier.transport
+#else
+|OtherNotifier
+#end
+
+#end
+|===
+#end
+
+
+
+#foreach($object in $sys.getNotificationConfiguration().getHandler())
+#parse("/template/notification.vm")
+#end
+
+#end
+#end

@@ -9,15 +9,18 @@ public class Attribute {
     private String description;
     private Object value;
 
+    private String type;
+
     public Attribute(String name, Object value) {
         this.name = name;
         this.value = value;
     }
 
-    public Attribute(String name, String description, Object value) {
+    public Attribute(String name, String description, Object value,String type) {
         this.name = name;
         this.description = description;
         this.value = value;
+        this.type = type;
     }
 
     public String getName() {

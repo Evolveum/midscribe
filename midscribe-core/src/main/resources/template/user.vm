@@ -1,6 +1,84 @@
-=== $!utils.getOrig($object.getName())
+=== $!processor.translator($!utils.getOrig($object.getName()))
 
-$!object.getDescription()
+$!processor.translator($!object.getDescription())
 
-$!utils.stripIndent($object.getDocumentation())
+$!processor.translator($!utils.stripIndent($object.getDocumentation()))
+
+[cols=2,options=header]
+|===
+|Parameter
+|Value
+
+#if ($object.name)
+|Name
+
+|$!processor.translator($object.name)
+
+#end
+
+#if ($object.fullname)
+|Full name
+
+|$!processor.translator($object.fullname)
+
+#end
+
+#if ($object.givenName)
+|Given name
+
+|$!processor.translator($object.givenName)
+
+#end
+
+#if ($object.familyName)
+|Family name
+
+|$!processor.translator($object.familyName)
+
+#end
+
+#if ($object.emailAddress)
+|Email address
+
+|$!processor.translator($object.emailAddress)
+
+#end
+
+#if ($object.preferredLanguage)
+|Preferred language
+
+|$!processor.translator($object.preferredLanguage)
+
+#end
+
+#if ($object.indestructible)
+|Indestructable
+
+|$!processor.translator($object.indestructible)
+
+#end
+|===
+
+#if ($object.getCredentials().getPassword().getValue())
+
+[cols=1,options=header]
+|===
+|Password
+
+|$!processor.translator($object.getCredentials().getPassword().getValue().getClearValue())
+
+|===
+
+#end
+
+#if ($object.assignment)
+==== Assignments
+    #set($objects = $object.assignment)
+    #parse("/template/assignment.vm")
+#end
+#if ($object.inducement)
+==== Inducements
+    #set($objects = $object.inducement)
+    #parse("/template/inducement.vm")
+#end
 

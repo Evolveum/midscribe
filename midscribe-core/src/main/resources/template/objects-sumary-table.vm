@@ -7,9 +7,9 @@
 |Oid
 
 #foreach($object in $objects)
-|$object.name.orig
-|$!object.description
-|$object.oid
+|$!processor.translator($object.name.orig)
+|$!processor.translator($!object.description)
+|$!processor.translator($object.oid)
 
 #end
 |===

@@ -1,6 +1,284 @@
-=== $!utils.getOrig($object.getName())
+=== $!processor.translator($!utils.getOrig($object.getName()))
 
-$!object.getDescription()
+$!processor.translator($!object.getDescription())
 
-$!utils.stripIndent($object.getDocumentation())
+$!processor.translator($!utils.stripIndent($object.getDocumentation()))
+
+#if($object.name || $object.executionState || $object.schedulingState || $object.binding)
+
+#end
+**Task details**
+
+[cols=2,options=header]
+|===
+|Parameter
+|Value
+
+#if($object.name)
+|name
+|$!processor.translator($object.name)
+#end
+
+#if($object.executionState)
+|executionState
+|$!processor.translator($object.executionState)
+#end
+
+
+#if($object.schedulingState)
+|schedulingState
+|$!processor.translator($object.schedulingState)
+#end
+
+#if($object.binding)
+|binding
+|$!processor.translator($object.binding)
+#end
+
+|===
+
+#if ($object.schedule)
+**Schedule**
+
+#if ($object.schedule.recurrence && $object.schedule.cronLikePattern)
+
+[cols=2,options=header]
+|===
+|recurrence
+|cronLikePattern
+
+|$!processor.translator($object.schedule.recurrence)
+|$!processor.translator($object.schedule.cronLikePattern)
+
+|===
+
+#elseif($object.schedule.recurrence && !$object.schedule.cronLikePattern)
+
+[cols=1,options=header]
+|===
+|recurrence
+
+|$!processor.translator($object.schedule.recurrence)
+
+|===
+
+#end
+
+#end
+
+#if($object.activity)
+**Activity**
+
+#if($object.activity.work.iterativeScripting)
+[cols=2,options=header]
+|===
+|Parameter
+|Value
+
+|Operation
+|[.underline]#iterativeScripting#
+
+|===
+
+#if($processor.getProperty("project.expressionEnables") == "true")
+[source,xml,indent=0,subs="verbatim,attributes",role="primary"]
+.SNIPPET CODE - QUERY
+----
+$utils.stripIndent($processor.serialize($object.activity.work.iterativeScripting.objects.query))
+----
+
+[source,xml,indent=0,subs="verbatim,attributes",role="secondary"]
+.SNIPPET CODE - SCRIPT
+----
+$utils.stripIndent($processor.serialize($object.activity.work.iterativeScripting.scriptExecutionRequest))
+----
+#end
+#end
+
+#if($object.activity.work.import)
+[cols=2,options=header]
+|===
+|Parameter
+|Value
+
+|Operation
+|[.underline]#import#
+
+|===
+
+[cols=2,options=header]
+|===
+|Parameter
+|Value
+
+#if($object.activity.work.import.resourceObjects.resourceRef.getOid())
+|resourceRef OID
+|$!processor.translator($object.activity.work.import.resourceObjects.resourceRef.getOid())
+#end
+
+#if($object.activity.work.import.resourceObjects.kind)
+|Kind
+|$!processor.translator($object.activity.work.import.resourceObjects.kind)
+#end
+
+#if($object.activity.work.import.resourceObjects.intent)
+|Intent
+|$!processor.translator($object.activity.work.import.resourceObjects.intent)
+#end
+
+#if($object.activity.work.import.resourceObjects.objectclass.getLocalPart())
+|Object class
+|$!processor.translator($object.activity.work.import.resourceObjects.objectclass.getLocalPart())
+#end
+
+#if($object.activity.distribution.workerThreads)
+|Worker Threads
+|$!processor.translator($object.activity.distribution.workerThreads)
+#end
+
+#if($object.activity.execution.mode)
+|Execution mode
+|$!processor.translator($object.activity.execution.mode)
+#else
+|full
+#end
+|===
+#end
+
+#if($object.activity.work.liveSynchronization)
+[cols=2,options=header]
+|===
+|Parameter
+|Value
+
+|Operation
+|[.underline]#liveSynchronization#
+
+|===
+
+[cols=2,options=header]
+|===
+|Parameter
+|Value
+
+#if($object.activity.work.liveSynchronization.resourceObjects.resourceRef.getOid())
+|resourceRef OID
+|$!processor.translator($object.activity.work.liveSynchronization.resourceObjects.resourceRef.getOid())
+#end
+
+#if($object.activity.work.liveSynchronization.resourceObjects.kind)
+|Kind
+|$!processor.translator($object.activity.work.liveSynchronization.resourceObjects.kind)
+#end
+
+#if($object.activity.work.liveSynchronization.resourceObjects.intent)
+|Intent
+|$!processor.translator($object.activity.work.liveSynchronization.resourceObjects.intent)
+#end
+
+#if($object.activity.work.liveSynchronization.resourceObjects.objectclass.getLocalPart())
+|Object class
+|$!processor.translator($object.activity.work.liveSynchronization.resourceObjects.objectclass.getLocalPart())
+#end
+
+#if($object.activity.distribution.workerThreads)
+|Worker Threads
+|$!processor.translator($object.activity.distribution.workerThreads)
+#end
+
+#if($object.activity.execution.mode)
+|Execution mode
+|$!processor.translator($object.activity.execution.mode)
+#else
+|full
+#end
+|===
+
+#end
+
+#if($object.activity.work.recomputation)
+[cols=2,options=header]
+|===
+|Parameter
+|Value
+
+|Operation
+|[.underline]#recomputation#
+
+#if($object.activity.work.recomputation.objects.type)
+|Object type
+|$!processor.translator($object.activity.work.recomputation.objects.type)
+#end
+
+|===
+
+#if($processor.getProperty("project.expressionEnables") == "true")
+[source,xml,indent=0,subs="verbatim,attributes",role="primary"]
+.SNIPPET CODE - QUERY
+----
+$utils.stripIndent($processor.serialize($object.activity.work.recomputation.objects.query))
+----
+#end
+#end
+
+#if($object.activity.work.reconciliation)
+[cols=2,options=header]
+|===
+|Parameter
+|Value
+
+|Operation
+|[.underline]#reconciliation#
+
+|===
+
+[cols=2,options=header]
+|===
+|Parameter
+|Value
+
+#if($object.activity.work.reconciliation.resourceObjects.resourceRef.getOid())
+|resourceRef OID
+|$!processor.translator($object.activity.work.reconciliation.resourceObjects.resourceRef.getOid())
+#end
+
+#if($object.activity.work.reconciliation.resourceObjects.kind)
+|Kind
+|$!processor.translator($object.activity.work.reconciliation.resourceObjects.kind)
+#end
+
+#if($object.activity.work.reconciliation.resourceObjects.intent)
+|Intent
+|$!processor.translator($object.activity.work.reconciliation.resourceObjects.intent)
+#end
+
+#if($object.activity.work.reconciliation.resourceObjects.objectclass.getLocalPart())
+|Object class
+|$!processor.translator($object.activity.work.reconciliation.resourceObjects.objectclass.getLocalPart())
+#end
+
+#if($object.activity.distribution.workerThreads)
+|Worker Threads
+|$!processor.translator($object.activity.distribution.workerThreads)
+#end
+
+#if($object.activity.execution.mode)
+|Execution mode
+|$!processor.translator($object.activity.execution.mode)
+#else
+|full
+#end
+|===
+#end
+#end
+
+
+#if ($object.assignment)
+==== Assignments
+    #set($objects = $object.assignment)
+    #parse("/template/assignment.vm")
+#end
+
+
+
 

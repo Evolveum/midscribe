@@ -1,0 +1,12 @@
+Look up table: **$!processor.translator($lookuptable.getName())**
+
+[cols=2,options="header"]
+|===
+|Key | Label
+
+#foreach($row in $lookuptable.getRow())
+|$!processor.translator($row.getKey())
+|$!processor.translator($row.getLabel())
+#end
+
+|===

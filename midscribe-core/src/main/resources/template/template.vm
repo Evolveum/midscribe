@@ -1,8 +1,8 @@
-=== $!utils.getOrig($object.getName())
+=== $!processor.translator($!utils.getOrig($object.getName()))
 
-$!object.getDescription()
+$!processor.translator($!object.getDescription())
 
-$!utils.stripIndent($object.getDocumentation())
+$!processor.translator($!utils.stripIndent($object.getDocumentation()))
 
 #set($includeRef = $object.getIncludeRef())
 #if ($includeRef)
@@ -21,10 +21,38 @@ $!utils.stripIndent($object.getDocumentation())
 #set($items = $object.getItem())
 #if ($items)
 ==== Items
+#set($lookUpTables=$processor.loadLookupTables())
 
 #foreach($item in $items)
 [discrete]
-===== $item.ref
+==== $!processor.translator($item.ref)
+
+
+
+#foreach($limit in $item.getLimitations())
+[cols=2,options=header]
+|===
+|Property |Value
+
+|Add | $!processor.translator($limit.getAccess().isAdd())
+|Modify | $!processor.translator($limit.getAccess().isModify())
+|Read | $!processor.translator($limit.getAccess().isRead())
+
+|===
+#end
+
+
+#set($enumerationRef = $item.getValueEnumerationRef())
+    #if ($enumerationRef)
+        #foreach($table in $lookUpTables)
+            #if ($enumerationRef.getOid() == $table.getOid())
+                #set($lookuptable = $table)
+                #parse("/template/lookuptable.vm")
+            #end
+        #end
+
+    #end
+
 ##todo
 #end
 #end
