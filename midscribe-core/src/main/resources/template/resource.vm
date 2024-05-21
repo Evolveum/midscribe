@@ -23,7 +23,6 @@ $!processor.translator($!utils.stripIndent($object.getDocumentation()))
 * **Connector type:**  $!processor.translator($!connectorValue)
 * **Connector version:** $!processor.translator($!connectorValueVersion)
 
-$object.schema.definition.xsd:schema
 
 [discrete]
 ===== Connector Configuration
@@ -67,19 +66,18 @@ $object.schema.definition.xsd:schema
 #if ($native || $configured)
 [discrete]
 ===== Capabilities
-
 #if ($native)
 [discrete]
 ====== Native
 #set($capabilities = $native)
-#parse("/template/capabilities.vm")
+#parse("/template/capabilities-native.vm")
 #end
 
 #if ($configured)
 [discrete]
 ====== Configured
 #set($capabilities = $configured)
-#parse("/template/capabilities.vm")
+#parse("/template/capabilities-configured.vm")
 #end
 #end
 

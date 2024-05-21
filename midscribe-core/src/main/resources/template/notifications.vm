@@ -94,10 +94,10 @@ $sysConfig
 
 === Message transport configuration
 
-#*#set($transportConfig=$sys.getMessageTransportConfiguration())
+#set($transportConfig=$sys.getMessageTransportConfiguration())
 $sys
 #if($transportConfig)
 $transportConfig
-#end*#
+#end
 #end
 #end

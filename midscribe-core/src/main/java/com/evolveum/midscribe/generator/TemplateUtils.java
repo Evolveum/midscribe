@@ -10,6 +10,7 @@ import com.evolveum.midscribe.generator.data.Attribute;
 import com.evolveum.prism.xml.ns._public.query_3.SearchFilterType;
 import com.evolveum.prism.xml.ns._public.types_3.PolyStringType;
 import com.evolveum.prism.xml.ns._public.types_3.SchemaDefinitionType;
+import jakarta.xml.bind.JAXBElement;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -17,7 +18,7 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
 
-import javax.xml.bind.JAXBElement;
+/*import javax.xml.bind.JAXBElement;*/
 import javax.xml.namespace.QName;
 import java.util.*;
 
