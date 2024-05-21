@@ -128,6 +128,10 @@ public class ProcessorUtils {
         return loadObjects(UserType.class);
     }
 
+    public List<ArchetypeType> loadArchetypes() throws Exception {
+        return loadObjects(ArchetypeType.class);
+    }
+
     public List<SystemConfigurationType> loadSystemConfiguration() throws Exception {
         return loadObjects(SystemConfigurationType.class);
     }

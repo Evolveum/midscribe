@@ -1,0 +1,66 @@
+=== $!processor.translator($!utils.getOrig($object.getName()))
+Object OID : **$object.getOid()**
+
+$!processor.translator($!object.getDescription())
+
+$!processor.translator($!utils.stripIndent($object.getDocumentation()))
+
+#if($object.name || $object.executionState || $object.schedulingState || $object.binding)
+
+#end
+
+#foreach($assignment in $object.getAssignment())
+#end
+#if($assignment)
+#foreach($relation in $assignment.getAssignmentRelation())
+holderType :  **$!processor.translator($relation.getHolderType().get(0))**
+#end
+#end
+
+#if($object.getArchetypePolicy())
+**Archetype policy**
+
+[cols=2,options=header]
+|===
+|Parameter
+|Value
+
+#set($label = $object.getArchetypePolicy().getDisplay().getLabel())
+#if($label)
+|label
+|$!processor.translator($label)
+#end
+
+#set($pluralLabel = $object.getArchetypePolicy().getDisplay().getPluralLabel())
+#if($pluralLabel)
+|pluralLabel
+|$!processor.translator($pluralLabel)
+#end
+
+#set($tooltip = $object.getArchetypePolicy().getDisplay().getTooltip())
+#if($tooltip)
+|tooltip
+|$!processor.translator($tooltip)
+#end
+
+#set($icon = $object.getArchetypePolicy().getDisplay().getIcon())
+#if($icon)
+|icon
+|cssClass : $!processor.translator($icon.getCssClass()) +
+color : $!processor.translator($icon.getColor())
+#end
+
+#set($objectTemplateRef = $object.getArchetypePolicy().getObjectTemplateRef())
+#if($objectTemplateRef)
+|objectTemplateRef
+|$!processor.translator($objectTemplateRef.getOid())
+#end
+
+|===
+
+#end
+
+
+
+
+
