@@ -1,12 +1,12 @@
 ## FUNCTION LIBRARIES
 
+== Notifications
+
 #set($sysConfig=$processor.loadSystemConfiguration())
 $sysConfig
 #foreach($sys in $sysConfig)
 
 #if(!$sys.isEmpty())
-
-== Notifications
 
 #set($objects=$sys.getNotificationConfiguration().getHandler())
 #if($objects)
@@ -85,19 +85,110 @@ $sysConfig
 |===
 #end
 
-
-
 #if($objects && $processor.getProperty("project.expressionEnables") == "true")
 #parse("/template/notification.vm")
 #end
 
-
-=== Message transport configuration
+== Message transport configuration
 
 #set($transportConfig=$sys.getMessageTransportConfiguration())
-$sys
+
 #if($transportConfig)
-$transportConfig
+#if($transportConfig.getMail())
+=== Mail transport
+#foreach($mail in $transportConfig.getMail())
+**$mail.getName()**
+#if($mail.getDefaultFrom())
+Default from : $mail.getDefaultFrom() +
+#end
+
+#foreach($server in $mail.getServer())
+[cols=2,options=header]
+|===
+|Parameter
+|Value
+
+#if($server.getUsername())
+|username
+|$server.getUsername()
+#end
+#if($server.getHost())
+|host
+|$server.getHost()
+#end
+#if($server.getPort())
+|port
+|$server.getPort()
+#end
+#if($server.getTransportSecurity())
+|transport security
+|$server.getTransportSecurity().value()
+#end
+
+|===
+#end
+#end
+#end
+
+#if($transportConfig.getSms())
+=== Sms transport
+#foreach($sms in $transportConfig.getSms())
+**$sms.getName()** +
+#if($sms.getDefaultFrom())
+Default from : $sms.getDefaultFrom() +
+#end
+#foreach($gateway in $sms.getGateway())
+[cols=2,options=header]
+|===
+|Parameter
+|Value
+
+#if($gateway.getUsername())
+|username
+|$gateway.getUsername()
+#end
+#if($gateway.getProxyHost())
+|proxy host
+|$gateway.getProxyHost()
+#end
+#if($gateway.getProxyPort())
+|proxy port
+|$gateway.getProxyPort()
+#end
+#if($gateway.getMethod())
+|transport security
+|$gateway.getMethod().value()
+#end
+
+|===
+#end
+#end
+#end
+
+#if($transportConfig.getFile())
+=== File transport
+#foreach($file in $transportConfig.getFile())
+**$file.getName()** +
+#if($file.getFile())
+File : $file.getFile() +
+#end
+#end
+#end
+
+#if($transportConfig.getCustomTransport())
+=== Custom transport
+#foreach($custom in $transportConfig.getCustomTransport())
+**$custom.getName()** +
+#if($custom.getType())
+Type : $custom.getType() +
+#end
+[source,xml,indent=0,subs="verbatim,attributes",role="primary"]
+.Expression
+----
+$utils.stripIndent($processor.serialize($custom.getExpression()))
+----
+#end
+#end
 #end
 #end
 #end

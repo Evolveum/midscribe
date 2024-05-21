@@ -1,4 +1,4 @@
-#if(!$objects.get(0).getRoleType())
+#if($objects)
 
 #foreach($object in $objects)
 

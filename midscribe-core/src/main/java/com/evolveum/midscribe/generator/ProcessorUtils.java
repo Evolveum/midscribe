@@ -133,6 +133,7 @@ public class ProcessorUtils {
     }
 
     public List<SystemConfigurationType> loadSystemConfiguration() throws Exception {
+        LOG.info(String.valueOf(loadObjects(SystemConfigurationType.class).size()) );
         return loadObjects(SystemConfigurationType.class);
     }
 

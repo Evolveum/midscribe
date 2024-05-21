@@ -1,8 +1,24 @@
 #macro(serializeExpression $notifier)
+#set($filter = "")
+#if($notifier.expressionFilter && $notifier.expressionFilter.size() > 0 && $notifier.expressionFilter.get(0).getExpressionEvaluator() && $notifier.expressionFilter.get(0).getExpressionEvaluator().size() > 0)
 #set($filter = $notifier.expressionFilter.get(0).getExpressionEvaluator().get(0).getValue())
+#end
+
+#set($recipient = "")
+#if($notifier.recipientExpression && $notifier.recipientExpression.size() > 0 && $notifier.recipientExpression.get(0).getExpressionEvaluator() && $notifier.recipientExpression.get(0).getExpressionEvaluator().size() > 0)
 #set($recipient = $notifier.recipientExpression.get(0).getExpressionEvaluator().get(0).getValue())
+#end
+
+#set($subject = "")
+#if($notifier.subjectExpression && $notifier.subjectExpression.getExpressionEvaluator() && $notifier.subjectExpression.getExpressionEvaluator().size() > 0)
 #set($subject = $notifier.subjectExpression.getExpressionEvaluator().get(0).getValue())
+#end
+
+#set($body = "")
+#if($notifier.bodyExpression && $notifier.bodyExpression.getExpressionEvaluator() && $notifier.bodyExpression.getExpressionEvaluator().size() > 0)
 #set($body = $notifier.bodyExpression.getExpressionEvaluator().get(0).getValue())
+#end
+
 
 [source,xml,indent=0,subs="verbatim,attributes",role="primary"]
 .Expression filter
