@@ -40,20 +40,10 @@ $!processor.translator($!utils.stripIndent($object.getDocumentation()))
 
 |===
 #end
+#if($item.getValueEnumerationRef().getOid())
+Lookup table OID : **$item.getValueEnumerationRef().getOid()**
+#end
 
-
-#set($enumerationRef = $item.getValueEnumerationRef())
-    #if ($enumerationRef)
-        #foreach($table in $lookUpTables)
-            #if ($enumerationRef.getOid() == $table.getOid())
-                #set($lookuptable = $table)
-                #parse("/template/lookuptable.vm")
-            #end
-        #end
-
-    #end
-
-##todo
 #end
 #end
 

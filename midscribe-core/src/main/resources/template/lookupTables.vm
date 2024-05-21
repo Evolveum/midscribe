@@ -1,0 +1,16 @@
+## FUNCTION LIBRARIES
+
+#set($lookUpTables=$processor.loadLookupTables())
+
+#if(!$lookUpTables.isEmpty())
+
+== Lookup tables
+
+#set($objects=$lookUpTables)
+#parse("/template/objects-sumary-table.vm")
+
+#foreach($object in $lookUpTables)
+#parse("/template/lookuptable.vm")
+#end
+
+#end

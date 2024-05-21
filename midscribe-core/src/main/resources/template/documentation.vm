@@ -31,4 +31,6 @@ Version $processor.getProperty("project.version"), $processor.getProperty("proje
 
 #parse("/template/archetypes.vm")
 
+#parse("/template/lookupTables.vm")
+
 #parse("/template/conclusion.vm")

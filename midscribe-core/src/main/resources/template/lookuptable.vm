@@ -1,10 +1,15 @@
-Look up table: **$!processor.translator($lookuptable.getName())**
+=== $!processor.translator($!utils.getOrig($object.getName()))
+Object OID : **$object.getOid()**
+
+$!processor.translator($!object.getDescription())
+
+$!processor.translator($!utils.stripIndent($object.getDocumentation()))
 
 [cols=2,options="header"]
 |===
 |Key | Label
 
-#foreach($row in $lookuptable.getRow())
+#foreach($row in $object.getRow())
 |$!processor.translator($row.getKey())
 |$!processor.translator($row.getLabel())
 #end
