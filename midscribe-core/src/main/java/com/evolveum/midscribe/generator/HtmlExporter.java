@@ -30,7 +30,7 @@ public class HtmlExporter extends ExporterBase {
                 .toDir(dir)
                 .toFile(file)
                 .headerFooter(true)
-                //.attributes(AttributesBuilder.attributes().styleSheetName("/Users/matejglombik/IdeaProjects/midscribe/midscribe-core/src/main/resources/css/style.css"))
+                .attributes(AttributesBuilder.attributes().styleSheetName("/Users/matejglombik/IdeaProjects/midscribe/midscribe-core/src/main/resources/css/style.css"))
                 .build();
 //                .templateDir(new File("./src/test/resources/css"));
 
