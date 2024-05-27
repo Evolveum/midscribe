@@ -1,3 +1,4 @@
+[[oid_$object.getOid()]]
 === $!processor.translator($!utils.getOrig($object.getName()))
 
 $!processor.translator($!object.getDescription())
@@ -41,7 +42,7 @@ $!processor.translator($!utils.stripIndent($object.getDocumentation()))
 |===
 #end
 #if($item.getValueEnumerationRef().getOid())
-Lookup table OID : **$item.getValueEnumerationRef().getOid()**
+Lookup table OID: <<oid_$item.getValueEnumerationRef().getOid(),**$item.getValueEnumerationRef().getOid()**>>
 #end
 
 #end

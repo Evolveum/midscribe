@@ -1,3 +1,4 @@
+[[oid_$object.getOid()]]
 === $!processor.translator($!utils.getOrig($object.getName()))
 
 $!processor.translator($!object.getDescription())
@@ -44,8 +45,7 @@ $!processor.translator($!utils.stripIndent($object.getDocumentation()))
 #foreach($parentOrgRef in $object.parentOrgRef)
 |**parentOrgRef**
 
-|$!processor.translator($parentOrgRef.getOid())
-
+|<<oid_$!processor.translator($parentOrgRef.getOid()),**$!processor.translator($parentOrgRef.getOid())**>>
 |$!processor.translator($parentOrgRef.getType().getLocalPart())
 
 #end
@@ -56,8 +56,7 @@ $!processor.translator($!utils.stripIndent($object.getDocumentation()))
 #foreach($roleMembershipRef in $object.roleMembershipRef)
 |**roleMembershipRef**
 
-|$!processor.translator($roleMembershipRef.getOid())
-
+|<<oid_$!processor.translator($roleMembershipRef.getOid()),**$!processor.translator($roleMembershipRef.getOid())**>>
 |$!processor.translator($roleMembershipRef.getType().getLocalPart())
 
 #end

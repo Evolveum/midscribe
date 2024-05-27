@@ -1,3 +1,4 @@
+[[oid_$object.getOid()]]
 === $!processor.translator($!utils.getOrig($object.getName()))
 Object OID : **$object.getOid()**
 
@@ -53,7 +54,7 @@ color : $!processor.translator($icon.getColor())
 #set($objectTemplateRef = $object.getArchetypePolicy().getObjectTemplateRef())
 #if($objectTemplateRef)
 |objectTemplateRef
-|$!processor.translator($objectTemplateRef.getOid())
+|<<oid_$!processor.translator($objectTemplateRef.getOid()),**$!processor.translator($objectTemplateRef.getOid())**>>
 #end
 
 |===

@@ -14,8 +14,7 @@ $!processor.translator($!object.construction.documentation)
 |Relation
 
 |**resourceRef**
-
-|$!processor.translator($object.construction.resourceRef.getOid())
+|<<oid_$!processor.translator($object.construction.resourceRef.getOid()),**$!processor.translator($object.construction.resourceRef.getOid())**>>
 
 |$!processor.translator($object.construction.resourceRef.getType().getLocalPart())
 

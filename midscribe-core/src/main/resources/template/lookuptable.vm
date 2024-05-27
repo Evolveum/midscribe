@@ -1,3 +1,4 @@
+[[oid_$object.getOid()]]
 === $!processor.translator($!utils.getOrig($object.getName()))
 Object OID : **$object.getOid()**
 

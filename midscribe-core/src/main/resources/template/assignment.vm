@@ -14,8 +14,7 @@ $!processor.translator($!object.documentation)
 |Relation
 
 |**targetRef**
-
-|$!processor.translator($object.targetRef.getOid())
+|<<oid_$!processor.translator($object.targetRef.getOid()),**$!processor.translator($object.targetRef.getOid())**>>
 
 |$!processor.translator($object.targetRef.getType().getLocalPart())
 
@@ -32,8 +31,6 @@ $!processor.translator($!object.documentation)
 |**Subtype**
 |$!processor.translator($!object.subtype)
 #end
-
-
 
 |===
 
@@ -54,7 +51,7 @@ $!processor.translator($!object.documentation)
 
 |**targetRef**
 
-|$!processor.translator($object.targetRef.getOid())
+|<<oid_$!processor.translator($object.targetRef.getOid()),**$!processor.translator($object.targetRef.getOid())**>>
 
 |$!processor.translator($object.targetRef.getType().getLocalPart())
 

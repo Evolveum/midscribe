@@ -1,3 +1,4 @@
+[[oid_$object.getOid()]]
 === $!processor.translator($!utils.getOrig($object.getName()))
 
 $!processor.translator($!object.getDescription())
@@ -113,7 +114,7 @@ $utils.stripIndent($processor.serialize($object.activity.work.iterativeScripting
 
 #if($object.activity.work.import.resourceObjects.resourceRef.getOid())
 |resourceRef OID
-|$!processor.translator($object.activity.work.import.resourceObjects.resourceRef.getOid())
+|<<oid_$!processor.translator($object.activity.work.import.resourceObjects.resourceRef.getOid()),**$!processor.translator($object.activity.work.import.resourceObjects.resourceRef.getOid())**>>
 #end
 
 #if($object.activity.work.import.resourceObjects.kind)
@@ -163,7 +164,7 @@ $utils.stripIndent($processor.serialize($object.activity.work.iterativeScripting
 
 #if($object.activity.work.liveSynchronization.resourceObjects.resourceRef.getOid())
 |resourceRef OID
-|$!processor.translator($object.activity.work.liveSynchronization.resourceObjects.resourceRef.getOid())
+|<<oid_$!processor.translator($object.activity.work.liveSynchronization.resourceObjects.resourceRef.getOid()),**$!processor.translator($object.activity.work.liveSynchronization.resourceObjects.resourceRef.getOid())**>>
 #end
 
 #if($object.activity.work.liveSynchronization.resourceObjects.kind)
@@ -239,7 +240,7 @@ $utils.stripIndent($processor.serialize($object.activity.work.recomputation.obje
 
 #if($object.activity.work.reconciliation.resourceObjects.resourceRef.getOid())
 |resourceRef OID
-|$!processor.translator($object.activity.work.reconciliation.resourceObjects.resourceRef.getOid())
+|<<oid_$!processor.translator($object.activity.work.reconciliation.resourceObjects.resourceRef.getOid()),**$!processor.translator($object.activity.work.reconciliation.resourceObjects.resourceRef.getOid())**>>
 #end
 
 #if($object.activity.work.reconciliation.resourceObjects.kind)
