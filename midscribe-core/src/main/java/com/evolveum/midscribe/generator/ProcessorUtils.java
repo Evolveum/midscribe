@@ -132,8 +132,15 @@ public class ProcessorUtils {
         return loadObjects(ArchetypeType.class);
     }
 
+    public List<ValuePolicyType> loadValuePolicies() throws Exception {
+        return loadObjects(ValuePolicyType.class);
+    }
+
+    public List<SecurityPolicyType> loadSecurityPolicies() throws Exception {
+        return loadObjects(SecurityPolicyType.class);
+    }
+
     public List<SystemConfigurationType> loadSystemConfiguration() throws Exception {
-        LOG.info(String.valueOf(loadObjects(SystemConfigurationType.class).size()) );
         return loadObjects(SystemConfigurationType.class);
     }
 

@@ -33,4 +33,8 @@ Version $processor.getProperty("project.version"), $processor.getProperty("proje
 
 #parse("/template/notifications.vm")
 
+#parse("/template/securityPolicies.vm")
+
+#parse("/template/valuePolicies.vm")
+
 #parse("/template/conclusion.vm")

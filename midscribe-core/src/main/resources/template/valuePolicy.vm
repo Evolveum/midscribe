@@ -1,0 +1,93 @@
+[[oid_$object.getOid()]]
+=== $!processor.translator($!utils.getOrig($object.getName()))
+Object OID : **$object.getOid()**
+
+$!processor.translator($!object.getDescription())
+
+$!processor.translator($!utils.stripIndent($object.getDocumentation()))
+
+
+#set($stringPolicy = $object.getStringPolicy())
+#if($stringPolicy)
+**String policy**
+
+$!processor.translator($!stringPolicy.getDescription())
+
+#set($limitations = $stringPolicy.getLimitations())
+#if($limitations)
+[cols=2,options=header]
+|===
+|Parameter
+|Value
+
+|minLength
+#if ($limitations.minLength)
+|$!processor.translator($limitations.minLength)
+#else
+| default
+#end
+
+|maxLength
+#if ($limitations.maxLength)
+|$!processor.translator($limitations.maxLength)
+#else
+| default
+#end
+
+|minUniqueChars
+#if ($limitations.minUniqueChars)
+|$!processor.translator($limitations.minUniqueChars)
+#else
+| default
+#end
+
+|checkAgainstDictionary
+#if ($limitations.checkAgainstDictionary)
+|$!processor.translator($limitations.checkAgainstDictionary)
+#else
+| default
+#end
+|===
+#end
+
+#foreach($limitation in $limitations.limit)
+
+[cols=2,options=header]
+|===
+|Parameter
+|Value
+
+|description
+#if ($limitation.getDescription())
+|$!processor.translator($limitation.getDescription())
+#else
+| default
+#end
+
+|minOccurs
+#if ($limitation.getMinOccurs())
+|$!processor.translator($limitation.getMinOccurs())
+#else
+| default
+#end
+
+|mustBeFirst
+#if ($limitation.isMustBeFirst() == "false" || $limitation.isMustBeFirst() == "true")
+|$!processor.translator($limitation.isMustBeFirst())
+#else
+| default
+#end
+
+|value
+#if ($limitation.getCharacterClass().getValue())
+|$!processor.translator($limitation.getCharacterClass().getValue())
+#else
+| default
+#end
+|===
+#end
+
+#end
+
+
+
