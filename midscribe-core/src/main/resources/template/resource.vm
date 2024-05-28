@@ -91,6 +91,8 @@ $!processor.translator($!type.getDescription())
 
 $!processor.translator($!type.getDocumentation())
 
+#if($type.getAttribute())
+
 [cols=2,options=header]
 |===
 |Attribute
@@ -103,6 +105,9 @@ $!processor.translator($!attribute.getDescription())
 #end
 |===
 
+#end
+
+#if($type.getAttribute())
 ====== Attribute Details
 
 #foreach($attribute in $utils.sortAttributes($type.getAttribute()))
@@ -120,6 +125,7 @@ $!processor.translator($!attribute.getDescription())
 
 #set($mappings = $utils.asList($attribute.getOutbound()))
 #parse("/template/mappings.vm")
+#end
 #end
 #end
 
