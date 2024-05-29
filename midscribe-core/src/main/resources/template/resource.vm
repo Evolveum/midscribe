@@ -111,6 +111,8 @@ $!processor.translator($!attribute.getDescription())
 ====== Attribute Details
 
 #foreach($attribute in $utils.sortAttributes($type.getAttribute()))
+[role="attribute-section"]
+--
 *$!processor.translator($!attribute.getRef().toString())* #if ($attribute.getDisplayName()) *($!processor.translator($!attribute.getDisplayName()))* #end
 
 #if (!$attribute.getInbound().isEmpty())
@@ -126,11 +128,16 @@ $!processor.translator($!attribute.getDescription())
 #set($mappings = $utils.asList($attribute.getOutbound()))
 #parse("/template/mappings.vm")
 #end
+--
 #end
 #end
 
 #if ($type.getCredentials())
-====== Credentials
+[role="attribute-section"]
+--
+
+[.important-attributes]#Credentials#
+
 #if (!$type.getCredentials().getPassword().getInbound().isEmpty())
 [.underline]#Inbounds#
 
@@ -144,9 +151,14 @@ $!processor.translator($!attribute.getDescription())
 #set($mappings = $type.getCredentials().getPassword().getOutbound())
 #parse("/template/mappings.vm")
 #end
+--
 #end
 #if ($type.getActivation())
-====== Activation
+[role="attribute-section"]
+--
+
+[.important-attributes]#Activation#
+
 #if ($type.getActivation().getExistence())
 **Existence: **
 
@@ -181,10 +193,13 @@ $!processor.translator($!attribute.getDescription())
 #parse("/template/mappings.vm")
 #end
 #end
-
+--
 #end
 #if ($type.getAssociation())
-====== Association
+[role="attribute-section"]
+--
+
+[.important-attributes]#Association#
 
 [cols=2,options=header]
 |===
@@ -217,7 +232,7 @@ $!processor.translator($!attribute.getDescription())
 
 |===
 #end
-
+--
 #end
 #end
 

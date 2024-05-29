@@ -502,6 +502,30 @@ h1, h2, h3, #toctitle, .sidebarblock>.content>.title, h4, h5, h6 {
     font-weight: bold;
 }
 
+h2 {
+    page-break-before: always;
+}
+
+ table {
+     page-break-inside: avoid;
+ }
+
+ thead {
+     display: table-header-group;
+ }
+
+ tfoot {
+     display: table-footer-group;
+ }
+
+.attribute-section {
+     page-break-inside: avoid;
+ }
+.important-attributes {
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #02405a;
+}
 
  .hidden {
      display: none;

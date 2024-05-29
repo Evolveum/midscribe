@@ -1,6 +1,8 @@
 #if($objects)
 
 #foreach($object in $objects)
+[role="attribute-section"]
+--
 
 #if($object.targetRef.getType().getLocalPart() == "ArchetypeType")
 [.underline]**Archetype**
@@ -35,9 +37,12 @@ $!processor.translator($!object.documentation)
 |===
 
 #end
-
+--
 #end
 #foreach($object in $objects)
+[role="attribute-section"]
+--
+
 #if($object.targetRef.getType().getLocalPart() != "ArchetypeType")
 **Assignment**
 
@@ -72,5 +77,6 @@ $!processor.translator($!object.documentation)
 |===
 
 #end
+--
 #end
 #end
