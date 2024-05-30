@@ -60,18 +60,6 @@ $!processor.translator($!utils.stripIndent($object.getDocumentation()))
 #end
 |===
 
-#if ($object.getCredentials().getPassword().getValue())
-
-[cols=1,options=header]
-|===
-|Password
-
-|$!processor.translator($object.getCredentials().getPassword().getValue().getClearValue())
-
-|===
-
-#end
-
 #if ($object.assignment)
 ==== Assignments
     #set($objects = $object.assignment)
