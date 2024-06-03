@@ -1,4 +1,4 @@
-#if ($processor.getProperty("project.expressionEnables") == "true")
+#if ($processor.getProperty("project.expressionEnabled") == "true")
 ## main object: $expression (ExpressionType)
 
 $!expression.getDescription()

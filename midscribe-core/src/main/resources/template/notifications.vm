@@ -85,7 +85,7 @@ $sysConfig
 |===
 #end
 
-#if($objects && $processor.getProperty("project.expressionEnables") == "true")
+#if($objects && $processor.getProperty("project.expressionEnabled") == "true")
 #parse("/template/notification.vm")
 #end
 

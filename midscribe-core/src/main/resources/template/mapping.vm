@@ -66,7 +66,7 @@ a¦
 `$target.getPath()` #if ($target.getName()) ($target.getName()) #end +
 #end
 
-#if ($mapping.getExpression() && $processor.getProperty("project.expressionEnables") == "true")
+#if ($mapping.getExpression() && $processor.getProperty("project.expressionEnabled") == "true")
 4+a¦ #set($expression = $mapping.getExpression())
 #parse("/template/expression.vm")
 #end

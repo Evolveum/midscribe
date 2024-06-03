@@ -8,6 +8,9 @@ $!processor.translator($!utils.stripIndent($object.getDocumentation()))
 #if($object.name || $object.executionState || $object.schedulingState || $object.binding)
 
 #end
+[role="attribute-section"]
+--
+
 **Task details**
 
 [cols=2,options=header]
@@ -38,7 +41,12 @@ $!processor.translator($!utils.stripIndent($object.getDocumentation()))
 
 |===
 
+--
+
 #if ($object.schedule)
+[role="attribute-section"]
+--
+
 **Schedule**
 
 #if ($object.schedule.recurrence && $object.schedule.cronLikePattern)
@@ -65,9 +73,13 @@ $!processor.translator($!utils.stripIndent($object.getDocumentation()))
 
 #end
 
+--
 #end
 
 #if($object.activity)
+[role="attribute-section"]
+--
+
 **Activity**
 
 #if($object.activity.work.iterativeScripting)
@@ -81,7 +93,7 @@ $!processor.translator($!utils.stripIndent($object.getDocumentation()))
 
 |===
 
-#if($processor.getProperty("project.expressionEnables") == "true")
+#if($processor.getProperty("project.expressionEnabled") == "true")
 [source,xml,indent=0,subs="verbatim,attributes",role="primary"]
 .SNIPPET CODE - QUERY
 ----
@@ -213,7 +225,7 @@ $utils.stripIndent($processor.serialize($object.activity.work.iterativeScripting
 
 |===
 
-#if($processor.getProperty("project.expressionEnables") == "true")
+#if($processor.getProperty("project.expressionEnabled") == "true")
 [source,xml,indent=0,subs="verbatim,attributes",role="primary"]
 .SNIPPET CODE - QUERY
 ----
@@ -271,6 +283,7 @@ $utils.stripIndent($processor.serialize($object.activity.work.recomputation.obje
 #end
 |===
 #end
+--
 #end
 
 

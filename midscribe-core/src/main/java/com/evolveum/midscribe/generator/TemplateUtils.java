@@ -240,7 +240,7 @@ public class TemplateUtils {
         ArrayList<String> arrayList = new ArrayList<>();
 
         if (input == null || input.isEmpty()) {
-            arrayList.add("BULLSHIT");
+            arrayList.add("");
             return arrayList;
         }
 

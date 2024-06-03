@@ -21,23 +21,27 @@ $!processor.translator($!utils.stripIndent($object.getDocumentation()))
     #set($connectorValueVersion = $utils.findIndices($connectorXNode))
 #end
 
+#if($!connectorValue)
 * **Connector type:**  $!processor.translator($!connectorValue)
+#end
+
+#if($!connectorValueVersion)
 * **Connector version:** $!processor.translator($!connectorValueVersion)
+#end
+
 
 
 [discrete]
 ===== Connector Configuration
 
-[cols=3,options=header]
+[cols=2,options=header]
 |===
 |Parameter
 |Value
-|Description
 
 #foreach($attribute in $utils.getConnectorConfiguration($object))
 |$!processor.translator($!attribute.getName())
 |$!processor.translator($!attribute.getValue())
-|$!processor.translator($!attribute.getDescription())
 
 #end
 |===
