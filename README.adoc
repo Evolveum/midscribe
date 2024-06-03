@@ -1,6 +1,6 @@
 = midscribe
 
-Tool that is able to generate documentation from midpoint configuration objects in asciidoc format and HTML export.
+Tool that is able to generate documentation from midpoint configuration objects in asciidoc format and HTML/PDF export.
 
 == How To Build
 
@@ -54,6 +54,7 @@ Usage: java [-Dlogback.configurationFile=logback.xml] -jar midscribe.jar [option
             Template file. File should be ZIP containing "template" directory with Velocity templates or path to directory with templates. Main template is "documentation.vm"
 ```
 
+
 === Examples
 
 Following example generates only AsciiDoc file
@@ -65,6 +66,51 @@ This example generates AsciiDoc as well as HTML file
 ```
 java -jar midscribe-executable.jar generate -s <FOLDER_WITH_MIDPOINT_XML_OBJECTS> -eo documentation.html -ef HTML
 ```
+
+This example generates AsciiDoc as well as PDF file with custom property file
+```
+java -jar midscribe-executable.jar generate -s <FOLDER_WITH_MIDPOINT_XML_OBJECTS> -eo documentation.pdf -ef PDF -pf <CUSTOM_PROPERTY_FILE>
+```
+
+== Supported midpoint objects
+
+The generator supports the following midpoint objects:
+
+* Object templates
+* Resources
+* Libraries
+* Orgs
+* Roles
+* Tasks
+* Users
+* Archetypes
+* LookupTables
+* Notifications
+* SecurityPolicies
+* ValuePolicies
+
+== Properties File Configuration
+
+The `midscribe.properties` or `custom.properties` file needs to include the following attributes for the title, project description etc. :
+
+* `project.name`=MidPoint Project Documentation
+* `project.author`=Company, s.r.o.
+* `project.version`=0.1
+* `project.date`={localdate}
+
+* `project.description`=This is the optional preamble (an untitled section body).\
+Useful for writing simple sectionless documents consisting only of a preamble.
+
+* `project.expressionEnabled`=false (false is default, if you want to generate all expressions in the documentation you need to set it to true. Expressions are generated when there is custom script in mappings, notifications etc.)
+
+== Custom styling
+You can customize you own style that will be used for generating HTML/PDF file. For that you need to override the style.css file that is located :
+```
+midscribe/midscribe-core/src/main/resources/css/style.css
+```
+
+When there is no default css file, AsciiDoctor default style will be used.
+PDF file uses the same styling as HTML because the PDF file is generated from HTML file.
 
 == Example
 
