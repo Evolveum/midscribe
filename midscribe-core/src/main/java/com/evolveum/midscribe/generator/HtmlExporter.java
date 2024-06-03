@@ -25,17 +25,34 @@ public class HtmlExporter extends ExporterBase {
         File dir = output.getAbsoluteFile().getParentFile();
         File file = new File(output.getName());
 
-        Options options = Options.builder()
-                .safe(SafeMode.UNSAFE)
-                .toDir(dir)
-                .toFile(file)
-                .headerFooter(true)
-                .attributes(AttributesBuilder.attributes().styleSheetName("/Users/matejglombik/IdeaProjects/midscribe/midscribe-core/src/main/resources/css/style.css"))
-                .build();
-//                .templateDir(new File("./src/test/resources/css"));
+        String cssFilePath = "../../midscribe-core/src/main/resources/css/style.css";
 
-        Asciidoctor doctor = createAsciidoctor();
+        File cssFile = new File(cssFilePath);
 
-        doctor.convertFile(adocFile, options);
+        if (cssFile.exists() && cssFile.length() > 0) {
+            Options options = Options.builder()
+                    .safe(SafeMode.UNSAFE)
+                    .toDir(dir)
+                    .toFile(file)
+                    .headerFooter(true)
+                    .attributes(AttributesBuilder.attributes().styleSheetName(cssFilePath))
+                    .build();
+
+            Asciidoctor doctor = createAsciidoctor();
+
+            doctor.convertFile(adocFile, options);
+        } else {
+            // If the CSS file is empty or does not exist, convert without adding a custom stylesheet
+            Options options = Options.builder()
+                    .safe(SafeMode.UNSAFE)
+                    .toDir(dir)
+                    .toFile(file)
+                    .headerFooter(true)
+                    .build();
+
+            Asciidoctor doctor = createAsciidoctor();
+
+            doctor.convertFile(adocFile, options);
+        }
     }
 }
