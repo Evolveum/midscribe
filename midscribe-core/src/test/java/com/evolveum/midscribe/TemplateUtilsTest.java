@@ -1,7 +1,8 @@
 package com.evolveum.midscribe;
 
-import com.evolveum.midpoint.xml.ns._public.common.common_3.CapabilityCollectionType;
+/*import com.evolveum.midpoint.xml.ns._public.common.common_3.CapabilityCollectionType;*/
 import com.evolveum.midpoint.xml.ns._public.common.common_3.ResourceType;
+import com.evolveum.midpoint.xml.ns._public.resource.capabilities_3.CapabilityCollectionType;
 import com.evolveum.midscribe.generator.*;
 import org.testng.AssertJUnit;
 import org.testng.annotations.Test;
@@ -34,7 +35,7 @@ public class TemplateUtilsTest extends MidscribeTest {
         variables.put("capabilities", capabilities);
 
         Properties props = new Properties();
-        props.setProperty(GeneratorProperties.VELOCITY_START_TEMPLATE, "/template/capabilities.vm");
+        props.setProperty(GeneratorProperties.VELOCITY_START_TEMPLATE, "/template/capabilities-native.vm");
         props.put(GeneratorProperties.VELOCITY_ADDITIONAL_VARIABLES, variables);
 
         Generator generator = new Generator(opts);

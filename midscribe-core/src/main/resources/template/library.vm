@@ -1,13 +1,13 @@
-=== $!utils.getOrig($object.getName())
+=== $!processor.translator($!utils.getOrig($object.getName()))
 
-$!object.getDescription()
+$!processor.translator($!object.getDescription())
 
-$!utils.stripIndent($object.getDocumentation())
+$!processor.translator($!utils.stripIndent($object.getDocumentation()))
 
 #foreach($expression in $object.getFunction())
-==== $expression.getName()
+==== $!processor.translator($expression.getName())
 
-$!expression.getDescription()
+$!processor.translator($!expression.getDescription())
 
 ===== Parameters
 
@@ -17,15 +17,15 @@ $!expression.getDescription()
 |Value
 
 #foreach($parameter in $expression.getParameter())
-|$!parameter.getName()
-| $!parameter.getType()
+|$!processor.translator($!parameter.getName())
+| $!processor.translator($!parameter.getType())
 
 #end
 |===
 
 ===== Return Type
 
-$expression.getReturnType()
+$!processor.translator($expression.getReturnType())
 
 #end
 ## todo describe functions

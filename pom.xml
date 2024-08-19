@@ -17,7 +17,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>11</java.version>
+        <java.version>21</java.version>
 
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
@@ -31,7 +31,7 @@
         <asciidoctorj.tabbed.code.version>0.3</asciidoctorj.tabbed.code.version>
         <commons.io.version>2.11.0</commons.io.version>
         <velocity.version>2.3</velocity.version>
-        <midpoint.version>4.4.1</midpoint.version>
+        <midpoint.version>4.8</midpoint.version>
         <testng.version>7.4.0</testng.version>
         <xml.apis.version>2.0.2</xml.apis.version>
         <jruby.version>9.2.19.0</jruby.version>

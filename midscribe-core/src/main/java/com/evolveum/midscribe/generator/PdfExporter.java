@@ -1,17 +1,10 @@
 package com.evolveum.midscribe.generator;
-
-import org.asciidoctor.Asciidoctor;
-import org.asciidoctor.Options;
-import org.asciidoctor.SafeMode;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.jruby.util.log.Logger;
+import org.jruby.util.log.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
 
-/**
- * Created by Viliam Repan (lazyman).
- */
 public class PdfExporter extends ExporterBase {
 
     private static final Logger LOG = LoggerFactory.getLogger(PdfExporter.class);
@@ -22,20 +15,38 @@ public class PdfExporter extends ExporterBase {
     }
 
     @Override
-    public void export(File adocFile, File output) throws IOException {
-        File dir = output.getAbsoluteFile().getParentFile();
-        File file = new File(output.getName());
+    public void export(File adocFile, File outputPdf) throws IOException {
+        File tempHtmlFile = File.createTempFile("temp", ".html");
 
-        Options options = Options.builder()
-                .safe(SafeMode.UNSAFE)
-                .inPlace(true)
-                .toDir(dir)
-                .toFile(file)
-                .backend("pdf")
-                .build();
+        try {
+            HtmlExporter htmlExporter = new HtmlExporter();
+            htmlExporter.export(adocFile, tempHtmlFile);
 
-        Asciidoctor doctor = createAsciidoctor();
-
-        doctor.convertFile(adocFile, options);
+            String princeCommand = "prince " + tempHtmlFile.getAbsolutePath() + " -o " + outputPdf.getAbsolutePath();
+            Process process = Runtime.getRuntime().exec(princeCommand);
+            int exitCode = process.waitFor();
+            if (exitCode != 0) {
+                LOG.error("PrinceXML conversion failed with exit code " + exitCode);
+            }
+        } catch (IOException | InterruptedException e) {
+            LOG.error("Error converting AsciiDoc to PDF", e);
+            throw new IOException("Conversion failed", e);
+        } finally {
+            // Delete temporary HTML file
+            tempHtmlFile.delete();
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

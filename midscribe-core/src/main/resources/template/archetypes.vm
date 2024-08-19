@@ -1,0 +1,16 @@
+## FUNCTION LIBRARIES
+
+#set($archetypes=$processor.loadArchetypes())
+
+#if(!$archetypes.isEmpty())
+
+== Archetypes
+
+#set($objects=$archetypes)
+#parse("/template/objects-sumary-table.vm")
+
+#foreach($object in $archetypes)
+#parse("/template/archetype.vm")
+#end
+
+#end

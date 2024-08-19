@@ -56,6 +56,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>fop</artifactId>
+            <version>2.7</version> <!-- or the latest version -->
+        </dependency>
+
+        <dependency>
             <groupId>com.evolveum.midpoint.infra</groupId>
             <artifactId>schema</artifactId>
         </dependency>

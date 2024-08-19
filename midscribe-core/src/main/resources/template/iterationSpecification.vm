@@ -7,21 +7,21 @@
 
 Max. iterations: $iterationSpecification.getMaxIterations()
 
-#if($iterationSpecification.getTokenExpression())
+#if($iterationSpecification.getTokenExpression() && $processor.getProperty("project.expressionEnabled") == "true")
 [discrete]
 $utils.createHeading($headingLevel) Token Expression
 #set($expression = $iterationSpecification.getTokenExpression())
 #parse("/template/expression.vm")
 #end
 
-#if($iterationSpecification.getPreIterationCondition())
+#if($iterationSpecification.getPreIterationCondition() && $processor.getProperty("project.expressionEnabled") == "true")
 [discrete]
 $utils.createHeading($headingLevel) Pre Iteration Condition
 #set($expression = $iterationSpecification.getPreIterationCondition())
 #parse("/template/expression.vm")
 #end
 
-#if($iterationSpecification.getPostIterationCondition())
+#if($iterationSpecification.getPostIterationCondition() && $processor.getProperty("project.expressionEnabled") == "true")
 [discrete]
 $utils.createHeading($headingLevel) Post Iteration Condition
 #set($expression = $iterationSpecification.getPostIterationCondition())

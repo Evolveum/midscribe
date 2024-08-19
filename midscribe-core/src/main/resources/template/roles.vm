@@ -10,7 +10,7 @@
 #parse("/template/objects-sumary-table.vm")
 
 #foreach($object in $roles)
-    #parse("/template/role.vm")
+#parse("/template/role.vm")
 #end
 
 #end
