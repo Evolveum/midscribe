@@ -12,7 +12,7 @@ import java.io.IOException;
 /**
  * Created by Viliam Repan (lazyman).
  */
-public class PdfExporter extends ExporterBase {
+public class  PdfExporter extends ExporterBase {
 
     private static final Logger LOG = LoggerFactory.getLogger(PdfExporter.class);
 
@@ -34,8 +34,8 @@ public class PdfExporter extends ExporterBase {
                 .backend("pdf")
                 .build();
 
-        Asciidoctor doctor = createAsciidoctor();
-
-        doctor.convertFile(adocFile, options);
+        try (Asciidoctor doctor = createAsciidoctor()) {
+            doctor.convertFile(adocFile, options);
+        }
     }
 }

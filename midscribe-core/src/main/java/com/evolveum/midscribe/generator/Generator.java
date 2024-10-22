@@ -7,8 +7,6 @@ import java.io.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
@@ -24,14 +22,12 @@ public class Generator {
     private static final Map<ExportFormat, Class<? extends Exporter>> EXPORTERS;
 
     static {
-        Map<ExportFormat, Class<? extends Exporter>> exporters = new HashMap<>();
-        exporters.put(ExportFormat.PDF, PdfExporter.class);
-        exporters.put(ExportFormat.HTML, HtmlExporter.class);
-
-        EXPORTERS = Collections.unmodifiableMap(exporters);
+        EXPORTERS = Map.ofEntries(
+                Map.entry(ExportFormat.PDF, PdfExporter.class),
+                Map.entry(ExportFormat.HTML, HtmlExporter.class));
     }
 
-    private GenerateOptions configuration;
+    private final GenerateOptions configuration;
 
     private LogListener logListener;
 
@@ -94,7 +90,8 @@ public class Generator {
             exporter.setLogListener(logListener);
 
             return exporter;
-        } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException ex) {
+        } catch (NoSuchMethodException | InvocationTargetException | InstantiationException |
+                 IllegalAccessException ex) {
             LOG.error("Couldn't create formatter of type " + clazz);
             return null;
         }
@@ -137,7 +134,7 @@ public class Generator {
     private MidPointObjectStore createObjectStore() throws Exception {
         MidPointObjectStore store = configuration.getObjectStoreInstance();
         if (store != null) {
-            LOG.debug("Using midPoint store instance: {}" + store.getClass().getName());
+            LOG.debug("Using midPoint store instance: {}", store.getClass().getName());
             return store;
         }
 

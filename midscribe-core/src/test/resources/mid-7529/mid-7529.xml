@@ -7,18 +7,13 @@
         <configured>
             <cap:activation>
                 <cap:status>
-                    <cap:attribute>ri:dis</cap:attribute>
-                    <cap:enableValue>false</cap:enableValue>
-                    <cap:disableValue>true</cap:disableValue>
-                </cap:status>
-            </cap:activation>
-            <cap:activation>
-                <cap:status>
                     <cap:attribute>ri:disabled</cap:attribute>
                     <cap:enableValue></cap:enableValue>
                     <cap:enableValue>false</cap:enableValue>
                     <cap:disableValue>true</cap:disableValue>
                 </cap:status>
+                <cap:validTo/>
+                <cap:lockoutStatus/>
             </cap:activation>
             <cap:countObjects>
                 <cap:simulate>sequentialSearch</cap:simulate>
@@ -32,17 +27,9 @@
             <cap:delete>
                 <cap:enabled>false</cap:enabled>
             </cap:delete>
-            <cap:credentials>
-                <cap:password/>
-            </cap:credentials>
             <cap:liveSync/>
             <cap:testConnection/>
             <cap:addRemoveAttributeValues/>
-            <cap:activation>
-                <cap:status/>
-                <cap:validTo/>
-                <cap:lockoutStatus/>
-            </cap:activation>
             <cap:credentials>
                 <cap:password>
                     <cap:returnedByDefault>false</cap:returnedByDefault>

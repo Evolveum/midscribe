@@ -38,13 +38,22 @@ public class CmdGenerateOptions extends GenerateOptions {
     public static final String P_PROPERTIES_FILE = "-pf";
     public static final String P_PROPERTIES_FILE_LONG = "--properties-file";
 
+
+    public static class ExportFormatConverter extends EnumConverterValidator<ExportFormat> {
+
+        public ExportFormatConverter() {
+            super(ExportFormat.class);
+        }
+    }
+
     @Parameter(names = {P_TEMPLATE, P_TEMPLATE_LONG}, descriptionKey = "generate.template")
     @Override
     public void setTemplate(File template) {
         super.setTemplate(template);
     }
 
-    @Parameter(names = {P_EXPORT_FORMAT, P_EXPORT_FORMAT_LONG}, descriptionKey = "generate.exportFormat")
+    @Parameter(names = {P_EXPORT_FORMAT, P_EXPORT_FORMAT_LONG}, descriptionKey = "generate.exportFormat",
+            converter = ExportFormatConverter.class, validateWith = ExportFormatConverter.class)
     @Override
     public void setExportFormat(ExportFormat exportFormat) {
         super.setExportFormat(exportFormat);

@@ -12,7 +12,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
 
-import javax.xml.bind.JAXBElement;
+import jakarta.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import java.util.*;
 
@@ -70,7 +70,7 @@ public class TemplateUtils {
         return sb.toString();
     }
 
-    private static final int countSkipCharacters(String[] lines) {
+    private static int countSkipCharacters(String[] lines) {
         int count = 0;
 
         outer:

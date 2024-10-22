@@ -18,7 +18,8 @@ public class InMemoryFileFilter implements IOFileFilter {
 
     public InMemoryFileFilter(File base, List<String> includes, List<String> excludes) {
         if (includes == null || includes.isEmpty()) {
-            includes = Arrays.asList("**.[xX][mM][lL]");
+            // todo how about json/yaml?
+            includes = List.of("**.[xX][mM][lL]");
         }
         include = buildFilter(base, includes);
         exclude = buildFilter(base, excludes);
@@ -37,15 +38,15 @@ public class InMemoryFileFilter implements IOFileFilter {
     @Override
     public boolean accept(File file) {
         if (file.isDirectory()) {
-            return exclude != null ? !exclude.accept(file) : true;
+            return exclude == null || !exclude.accept(file);
         }
 
-        boolean included = include != null ? include.accept(file) : true;
+        boolean included = include == null || include.accept(file);
         if (!included) {
             return false;
         }
 
-        return exclude != null ? !exclude.accept(file) : true;
+        return exclude == null || !exclude.accept(file);
     }
 
     @Override

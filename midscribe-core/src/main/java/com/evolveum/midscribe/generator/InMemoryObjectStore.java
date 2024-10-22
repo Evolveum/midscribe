@@ -65,12 +65,10 @@ public class InMemoryObjectStore implements MidPointObjectStore {
         ParsingContext parsingContext = prismContext.createParsingContextForCompatibilityMode();
 
         for (File source : options.getSourceDirectory()) {
-            Iterator<File> files = FileUtils.iterateFiles(source,
+            Collection<File> files = FileUtils.listFiles(source,
                     new InMemoryFileFilter(source, options.getInclude(), options.getExclude()), TrueFileFilter.INSTANCE);
 
-            while (files.hasNext()) {
-                File file = files.next();
-
+            for (File file : files) {
                 LOG.debug("Loading {}", file);
 
                 try (InputStream is = new FileInputStream(file)) {

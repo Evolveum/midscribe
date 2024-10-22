@@ -28,12 +28,12 @@ public class HtmlExporter extends ExporterBase {
                 .safe(SafeMode.UNSAFE)
                 .toDir(dir)
                 .toFile(file)
-                .headerFooter(true)
+                .standalone(true)
                 .build();
 //                .templateDir(new File("./src/test/resources/css"));
 
-        Asciidoctor doctor = createAsciidoctor();
-
-        doctor.convertFile(adocFile, options);
+        try (Asciidoctor doctor = createAsciidoctor()) {
+            doctor.convertFile(adocFile, options);
+        }
     }
 }
