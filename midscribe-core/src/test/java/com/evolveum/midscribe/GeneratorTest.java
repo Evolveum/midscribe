@@ -19,7 +19,7 @@ public class GeneratorTest extends MidscribeTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(GeneratorTest.class);
 
-    @Test(enabled = false)
+    @Test
     public void generateExample() throws Exception {
         GenerateOptions opts = prepareOptions("generateExample");
         opts.setSourceDirectory(List.of(new File("./src/test/resources/objects")));
@@ -29,7 +29,7 @@ public class GeneratorTest extends MidscribeTest {
         generator.generate();
     }
 
-    @Test(enabled = false)
+    @Test
     public void generatePdfExample() throws Exception {
         GenerateOptions opts = prepareOptions("generatePdfExample");
         opts.setSourceDirectory(List.of(new File("./src/test/resources/objects")));
@@ -40,7 +40,7 @@ public class GeneratorTest extends MidscribeTest {
         generator.generate();
     }
 
-    @Test(enabled = false)
+    @Test
     public void generateWithCustomZipTemplate() throws Exception {
         GenerateOptions opts = prepareOptions("generateWithCustomZipTemplate");
         opts.setSourceDirectory(List.of(new File("./src/test/resources/objects")));
@@ -51,7 +51,7 @@ public class GeneratorTest extends MidscribeTest {
         generator.generate();
     }
 
-    @Test(enabled = false)
+    @Test
     public void generateWithCustomDirectoryTemplate() throws Exception {
         GenerateOptions opts = prepareOptions("generateWithCustomDirectoryTemplate");
         opts.getExclude().addAll(Arrays.asList("users/*.xml", "tasks/misc/*"));
@@ -61,7 +61,7 @@ public class GeneratorTest extends MidscribeTest {
         generator.generate();
     }
 
-    @Test(enabled = false)
+    @Test
     public void generateAdocHtml() throws IOException {
         HtmlExporter exporter = new HtmlExporter();
 
@@ -70,7 +70,7 @@ public class GeneratorTest extends MidscribeTest {
         exporter.export(adoc, html);
     }
 
-    @Test(enabled = false)
+    @Test
     public void generateAdocPdf() throws IOException {
         HtmlExporter exporter = new HtmlExporter();
 
@@ -79,7 +79,7 @@ public class GeneratorTest extends MidscribeTest {
         exporter.export(adoc, html);
     }
 
-    @Test(enabled = false)
+    @Test
     public void generateHtmlWithCustomLogListener() throws Exception {
         GenerateOptions opts = prepareOptions("generateHtmlWithCustomLogListener");
         opts.setSourceDirectory(List.of(new File("./src/test/resources/objects")));
