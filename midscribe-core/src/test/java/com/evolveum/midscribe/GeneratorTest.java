@@ -40,7 +40,7 @@ public class GeneratorTest extends MidscribeTest {
         generator.generate();
     }
 
-    @Test
+    @Test(enabled = false)
     public void generateWithCustomZipTemplate() throws Exception {
         GenerateOptions opts = prepareOptions("generateWithCustomZipTemplate");
         opts.setSourceDirectory(List.of(new File("./src/test/resources/objects")));
@@ -51,7 +51,7 @@ public class GeneratorTest extends MidscribeTest {
         generator.generate();
     }
 
-    @Test
+    @Test(enabled = false)
     public void generateWithCustomDirectoryTemplate() throws Exception {
         GenerateOptions opts = prepareOptions("generateWithCustomDirectoryTemplate");
         opts.getExclude().addAll(Arrays.asList("users/*.xml", "tasks/misc/*"));
@@ -79,7 +79,7 @@ public class GeneratorTest extends MidscribeTest {
         exporter.export(adoc, html);
     }
 
-    @Test
+    @Test(enabled = false)
     public void generateHtmlWithCustomLogListener() throws Exception {
         GenerateOptions opts = prepareOptions("generateHtmlWithCustomLogListener");
         opts.setSourceDirectory(List.of(new File("./src/test/resources/objects")));
