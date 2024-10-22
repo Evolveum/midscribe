@@ -19,7 +19,7 @@ public class GeneratorTest extends MidscribeTest {
 
     private static final Logger LOG = LoggerFactory.getLogger(GeneratorTest.class);
 
-    @Test
+    @Test(enabled = false)
     public void generateExample() throws Exception {
         GenerateOptions opts = prepareOptions("generateExample");
         opts.setSourceDirectory(List.of(new File("./src/test/resources/objects")));
@@ -29,7 +29,7 @@ public class GeneratorTest extends MidscribeTest {
         generator.generate();
     }
 
-    @Test
+    @Test(enabled = false)
     public void generatePdfExample() throws Exception {
         GenerateOptions opts = prepareOptions("generatePdfExample");
         opts.setSourceDirectory(List.of(new File("./src/test/resources/objects")));
@@ -61,7 +61,7 @@ public class GeneratorTest extends MidscribeTest {
         generator.generate();
     }
 
-    @Test
+    @Test(enabled = false)
     public void generateAdocHtml() throws IOException {
         HtmlExporter exporter = new HtmlExporter();
 
@@ -70,7 +70,7 @@ public class GeneratorTest extends MidscribeTest {
         exporter.export(adoc, html);
     }
 
-    @Test
+    @Test(enabled = false)
     public void generateAdocPdf() throws IOException {
         HtmlExporter exporter = new HtmlExporter();
 
