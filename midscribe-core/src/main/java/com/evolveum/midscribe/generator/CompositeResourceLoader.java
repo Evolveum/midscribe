@@ -21,11 +21,11 @@ import java.util.zip.ZipInputStream;
  */
 public class CompositeResourceLoader extends ResourceLoader {
 
-    private ClasspathResourceLoader classpathResourceLoader = new ClasspathResourceLoader();
+    private final ClasspathResourceLoader classpathResourceLoader = new ClasspathResourceLoader();
 
-    private File template;
+    private final File template;
 
-    private Map<String, byte[]> templateMap = new HashMap<>();
+    private final Map<String, byte[]> templateMap = new HashMap<>();
 
     public CompositeResourceLoader(File template) {
         this.template = template;

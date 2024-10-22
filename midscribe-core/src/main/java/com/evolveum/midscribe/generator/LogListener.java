@@ -37,7 +37,7 @@ public interface LogListener {
             }
 
             for (Level l : values()) {
-                if (severity.equals(l)) {
+                if (l.severity == severity) {
                     return l;
                 }
             }
@@ -48,17 +48,17 @@ public interface LogListener {
 
     class MessageDetails {
 
-        private int lineNumber;
+        private final int lineNumber;
 
-        private String path;
+        private final String path;
 
-        private String dir;
+        private final String dir;
 
-        private String file;
+        private final String file;
 
-        private String sourceFileName;
+        private final String sourceFileName;
 
-        private String sourceMethodName;
+        private final String sourceMethodName;
 
         public MessageDetails(int lineNumber, String path, String dir, String file, String sourceFileName, String sourceMethodName) {
             this.lineNumber = lineNumber;
