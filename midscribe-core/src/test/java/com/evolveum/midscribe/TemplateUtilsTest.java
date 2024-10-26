@@ -19,7 +19,7 @@ public class TemplateUtilsTest extends MidscribeTest {
      */
     @Test(enabled = false)
     public void testDescribeCapability() throws Exception {
-        GenerateOptions opts = prepareOptions("mid-7529");
+        GeneratorOptions opts = prepareOptions("mid-7529");
         opts.setInclude(List.of("mid-7529/mid-7529.xml"));
 
         MidPointObjectStore store = new InMemoryObjectStore(opts);

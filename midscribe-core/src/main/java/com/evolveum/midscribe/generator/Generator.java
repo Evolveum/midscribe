@@ -27,11 +27,11 @@ public class Generator {
                 Map.entry(ExportFormat.HTML, HtmlExporter.class));
     }
 
-    private final GenerateOptions configuration;
+    private final GeneratorOptions configuration;
 
     private LogListener logListener;
 
-    public Generator(GenerateOptions configuration) {
+    public Generator(GeneratorOptions configuration) {
         this.configuration = configuration;
     }
 
@@ -145,7 +145,7 @@ public class Generator {
 
         LOG.debug("Setting up midPoint store from class: {}", storeType);
 
-        Constructor<? extends MidPointObjectStore> con = storeType.getConstructor(GenerateOptions.class);
+        Constructor<? extends MidPointObjectStore> con = storeType.getConstructor(GeneratorOptions.class);
         store = con.newInstance(configuration);
         store.init();
 

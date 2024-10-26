@@ -1,7 +1,7 @@
 package com.evolveum.midscribe;
 
 import com.evolveum.midscribe.generator.ExportFormat;
-import com.evolveum.midscribe.generator.GenerateOptions;
+import com.evolveum.midscribe.generator.GeneratorOptions;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.Validate;
 import org.testng.AssertJUnit;
@@ -19,8 +19,8 @@ import java.util.List;
  */
 public abstract class MidscribeTest {
 
-    protected GenerateOptions prepareOptions(String name) {
-        GenerateOptions opts = new GenerateOptions();
+    protected GeneratorOptions prepareOptions(String name) {
+        GeneratorOptions opts = new GeneratorOptions();
         opts.setSourceDirectory(List.of(new File("./src/test/resources")));
         opts.setInclude(Arrays.asList("objects/**/*.xml"));
         opts.setAdocOutput(new File("./target/" + name + ".adoc"));

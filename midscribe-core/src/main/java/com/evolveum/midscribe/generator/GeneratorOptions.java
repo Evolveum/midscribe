@@ -3,11 +3,12 @@ package com.evolveum.midscribe.generator;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * Created by Viliam Repan (lazyman).
  */
-public class GenerateOptions {
+public class GeneratorOptions {
 
     private List<File> sourceDirectory;
 
@@ -23,7 +24,7 @@ public class GenerateOptions {
 
     private File exportOutput;
 
-    private File properties;
+    private Properties properties;
 
     private boolean expand;
 
@@ -114,11 +115,11 @@ public class GenerateOptions {
         return exclude;
     }
 
-    public File getProperties() {
+    public Properties getProperties() {
         return properties;
     }
 
-    public void setProperties(File properties) {
+    public void setProperties(Properties properties) {
         this.properties = properties;
     }
 

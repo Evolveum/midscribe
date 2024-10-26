@@ -10,6 +10,7 @@ import com.evolveum.midscribe.util.InMemoryFileFilter;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 import org.apache.commons.lang3.Validate;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,13 +27,11 @@ public class InMemoryObjectStore implements MidPointObjectStore {
 
     private Map<Class<? extends ObjectType>, List<ObjectType>> objects = new HashMap<>();
 
-    private GenerateOptions options;
+    private final GeneratorOptions options;
 
     private PrismContext prismContext;
 
-    public InMemoryObjectStore(GenerateOptions options) {
-        Validate.notNull(options);
-
+    public InMemoryObjectStore(@NotNull GeneratorOptions options) {
         this.options = options;
     }
 

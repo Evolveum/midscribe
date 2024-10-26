@@ -18,7 +18,7 @@ import static com.evolveum.midscribe.generator.GeneratorProperties.*;
  */
 public class VelocityGeneratorProcessor {
 
-    private GenerateOptions options;
+    private GeneratorOptions options;
 
     private VelocityEngine engine;
 
@@ -26,7 +26,7 @@ public class VelocityGeneratorProcessor {
 
     private Map<String, Object> velocityAdditionalVariables;
 
-    public VelocityGeneratorProcessor(GenerateOptions options, Properties props) {
+    public VelocityGeneratorProcessor(GeneratorOptions options, Properties props) {
         this.options = options;
 
         init(props);
