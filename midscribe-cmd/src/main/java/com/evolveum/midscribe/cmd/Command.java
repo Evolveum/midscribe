@@ -1,22 +1,22 @@
 package com.evolveum.midscribe.cmd;
 
 import com.evolveum.midscribe.cmd.action.GenerateAction;
-import com.evolveum.midscribe.cmd.action.GenerateOptions;
+import com.evolveum.midscribe.cmd.action.GenerateActionOptions;
 
 /**
  * @author Viliam Repan (lazyman)
  */
 public enum Command {
 
-    GENERATE("generate", GenerateOptions.class, GenerateAction.class);
+    GENERATE("generate", GenerateActionOptions.class, GenerateAction.class);
 
-    private String commandName;
+    private final String commandName;
 
-    private Class options;
+    private final Class<?> options;
 
-    private Class<? extends Action> action;
+    private final Class<? extends Action<?, ?>> action;
 
-    Command(String commandName, Class options, Class<? extends Action> action) {
+    Command(String commandName, Class<?> options, Class<? extends Action<?, ?>> action) {
         this.commandName = commandName;
         this.options = options;
         this.action = action;
@@ -28,13 +28,13 @@ public enum Command {
 
     public Object createOptions() {
         try {
-            return options.newInstance();
+            return options.getDeclaredConstructor().newInstance();
         } catch (Exception ex) {
             throw new IllegalStateException(ex);
         }
     }
 
-    public static Action createAction(String command) {
+    public static Action<?, ?> createAction(String command) {
         Command cmd = findCommand(command);
         if (cmd == null) {
             return null;
@@ -45,7 +45,7 @@ public enum Command {
                 return null;
             }
 
-            return cmd.action.newInstance();
+            return cmd.action.getDeclaredConstructor().newInstance();
         } catch (Exception ex) {
             throw new IllegalStateException(ex);
         }
