@@ -1,4 +1,4 @@
-package com.evolveum.midscribe.cmd;
+package com.evolveum.midscribe.cmd.util;
 
 import com.beust.jcommander.IParameterValidator;
 import com.beust.jcommander.IStringConverter;
@@ -12,14 +12,15 @@ import java.net.URI;
  */
 public class FileConverter implements IStringConverter<File>, IParameterValidator {
 
-    private String optionName;
+    private final String parameterName;
 
+    @SuppressWarnings("unused")
     public FileConverter() {
         this(null);
     }
 
     public FileConverter(String optionName) {
-        this.optionName = optionName;
+        this.parameterName = optionName;
     }
 
     @Override
@@ -31,7 +32,7 @@ public class FileConverter implements IStringConverter<File>, IParameterValidato
         try {
             return new File(value);
         } catch (IllegalArgumentException ex) {
-            throw new IllegalArgumentException("Option " + optionName
+            throw new IllegalArgumentException("Option " + parameterName
                     + " doesn't contain valid URL ('" + value + "')", ex);
         }
     }

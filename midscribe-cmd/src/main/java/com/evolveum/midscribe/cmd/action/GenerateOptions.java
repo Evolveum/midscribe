@@ -1,9 +1,10 @@
-package com.evolveum.midscribe.cmd;
+package com.evolveum.midscribe.cmd.action;
 
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.Parameters;
+import com.evolveum.midscribe.cmd.util.EnumConverterValidator;
+import com.evolveum.midscribe.cmd.util.FileConverter;
 import com.evolveum.midscribe.generator.ExportFormat;
-import com.evolveum.midscribe.generator.GenerateOptions;
 
 import java.io.File;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  * Created by Viliam Repan (lazyman).
  */
 @Parameters(resourceBundle = "messages", commandDescriptionKey = "generate")
-public class CmdGenerateOptions extends GenerateOptions {
+public class GenerateOptions extends com.evolveum.midscribe.generator.GenerateOptions {
 
     public static final String P_SOURCE_DIRECTORY = "-s";
     public static final String P_SOURCE_DIRECTORY_LONG = "--source-directory";

@@ -1,11 +1,14 @@
 package com.evolveum.midscribe.cmd;
 
+import com.evolveum.midscribe.cmd.action.GenerateAction;
+import com.evolveum.midscribe.cmd.action.GenerateOptions;
+
 /**
  * @author Viliam Repan (lazyman)
  */
 public enum Command {
 
-    GENERATE("generate", CmdGenerateOptions.class, GenerateAction.class);
+    GENERATE("generate", GenerateOptions.class, GenerateAction.class);
 
     private String commandName;
 
