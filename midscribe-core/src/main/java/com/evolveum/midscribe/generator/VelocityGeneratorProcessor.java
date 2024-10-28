@@ -18,7 +18,7 @@ import static com.evolveum.midscribe.generator.GeneratorProperties.*;
  */
 public class VelocityGeneratorProcessor {
 
-    private GeneratorOptions options;
+    private final GeneratorOptions options;
 
     private VelocityEngine engine;
 
@@ -42,14 +42,13 @@ public class VelocityGeneratorProcessor {
         props.put(RuntimeConstants.RESOURCE_LOADER, "composite");
         props.put("composite.resource.loader.instance", new CompositeResourceLoader(template));
 
-        if (properties != null) {
-            props.putAll(properties);
-        }
+        props.putAll(properties);
 
         engine = new VelocityEngine();
         engine.init(props);
     }
 
+    @SuppressWarnings("unchecked")
     private <T> T getProperty(Properties properties, String name, Class<T> type, T defaultValue) {
         Object value = properties.get(name);
         if (value == null) {
@@ -80,7 +79,7 @@ public class VelocityGeneratorProcessor {
         context.put("processor", new ProcessorUtils(ctx));
 
         if (velocityAdditionalVariables != null) {
-            velocityAdditionalVariables.forEach((k, v) -> context.put(k, v));
+            velocityAdditionalVariables.forEach(context::put);
         }
 
         TemplateEngineContextBuilder builder = createTemplateEngineContextBuilder();

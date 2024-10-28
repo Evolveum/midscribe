@@ -63,7 +63,7 @@ public class Generator {
 
         LOG.info("Asciidoc file '{}' generated for all objects", adocFile.getPath());
 
-        if (configuration.getExportFormat() == null) {
+        if (configuration.getExportFormat() == null || configuration.getExportFormat() == ExportFormat.ASCIIDOC) {
             return;
         }
 

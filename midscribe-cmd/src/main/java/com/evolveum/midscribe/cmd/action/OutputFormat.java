@@ -4,7 +4,7 @@ import com.evolveum.midscribe.generator.ExportFormat;
 
 public enum OutputFormat {
 
-    ASCIIDOC(null),
+    ADOC(ExportFormat.ASCIIDOC),
 
     PDF(ExportFormat.PDF),
 

@@ -61,7 +61,7 @@ public class GenerateActionOptions {
 
     @Parameter(names = {P_OUTPUT_FORMAT, P_OUTPUT_FORMAT_LONG}, descriptionKey = "generate.outputFormat",
             converter = OutputFormatConverterValidator.class, validateWith = OutputFormatConverterValidator.class)
-    private OutputFormat outputFormat = OutputFormat.ASCIIDOC;
+    private OutputFormat outputFormat = OutputFormat.ADOC;
 
     @Parameter(names = {P_TEMPLATE, P_TEMPLATE_LONG}, descriptionKey = "generate.template",
             converter = FileConverter.class)
