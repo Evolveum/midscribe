@@ -22,7 +22,7 @@ public class GeneratorTest extends MidscribeTest {
     @Test
     public void generateExample() throws Exception {
         GeneratorOptions opts = prepareOptions("generateExample");
-        opts.setSourceDirectory(List.of(new File("./src/test/resources/objects")));
+        opts.setSources(List.of(new File("./src/test/resources/objects")));
         opts.getExclude().addAll(Arrays.asList("users/*.xml", "tasks/misc/*"));
 
         Generator generator = new Generator(opts);
@@ -32,7 +32,7 @@ public class GeneratorTest extends MidscribeTest {
     @Test
     public void generatePdfExample() throws Exception {
         GeneratorOptions opts = prepareOptions("generatePdfExample");
-        opts.setSourceDirectory(List.of(new File("./src/test/resources/objects")));
+        opts.setSources(List.of(new File("./src/test/resources/objects")));
         opts.getExclude().addAll(Arrays.asList("users/*.xml", "tasks/misc/*"));
         opts.setExportFormat(ExportFormat.PDF);
 
@@ -43,7 +43,7 @@ public class GeneratorTest extends MidscribeTest {
     @Test
     public void generateWithCustomZipTemplate() throws Exception {
         GeneratorOptions opts = prepareOptions("generateWithCustomZipTemplate");
-        opts.setSourceDirectory(List.of(new File("./src/test/resources/objects")));
+        opts.setSources(List.of(new File("./src/test/resources/objects")));
         opts.getExclude().addAll(Arrays.asList("users/*.xml", "tasks/misc/*"));
         opts.setTemplate(new File("./src/test/resources/template.zip"));
 
@@ -82,7 +82,7 @@ public class GeneratorTest extends MidscribeTest {
     @Test
     public void generateHtmlWithCustomLogListener() throws Exception {
         GeneratorOptions opts = prepareOptions("generateHtmlWithCustomLogListener");
-        opts.setSourceDirectory(List.of(new File("./src/test/resources/objects")));
+        opts.setSources(List.of(new File("./src/test/resources/objects")));
         opts.setInclude(List.of("generateHtmlWithCustomLogListener.xml"));
 
         List<String> messages = new ArrayList<>();

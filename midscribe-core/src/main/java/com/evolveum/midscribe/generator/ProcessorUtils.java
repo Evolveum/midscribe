@@ -6,6 +6,8 @@ import com.evolveum.midpoint.schema.result.OperationResult;
 import com.evolveum.midpoint.util.LocalizableMessage;
 import com.evolveum.midpoint.util.exception.SchemaException;
 import com.evolveum.midpoint.xml.ns._public.common.common_3.*;
+import com.evolveum.midscribe.generator.store.GetOptions;
+import com.evolveum.midscribe.generator.store.ObjectStore;
 import com.evolveum.prism.xml.ns._public.types_3.RawType;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -61,7 +63,7 @@ public class ProcessorUtils {
             return ((RawType) object).extractString();
         }
 
-        PrismContext prismContext = context.getStore().getPrismContext();
+        PrismContext prismContext = context.getPrismContext();
 
         final QName fakeQName = new QName(PrismConstants.NS_TYPES, "object");
 
@@ -167,19 +169,18 @@ public class ProcessorUtils {
             return null;
         }
 
-        MidPointObjectStore store = context.getStore();
-        return store.get(type, oid);
+        ObjectStore store = context.getStore();
+        return store.get(type, oid, GetOptions.create());
     }
 
     private <T extends ObjectType> List<T> loadObjects(Class<T> type) throws Exception {
         List<T> objects = new ArrayList<>();
 
-        MidPointObjectStore store = context.getStore();
-        List<T> result = store.list(type);
-        if (result != null) {
-            objects.addAll(result);
-            Collections.sort(objects, new ObjectTypeComparator());
-        }
+        ObjectStore store = context.getStore();
+        List<T> result = store.list(type, GetOptions.create());
+
+        objects.addAll(result);
+        Collections.sort(objects, new ObjectTypeComparator());
 
         return objects;
     }

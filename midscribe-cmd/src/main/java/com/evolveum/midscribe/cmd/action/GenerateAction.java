@@ -41,8 +41,8 @@ public class GenerateAction implements Action<GenerateActionOptions, Void> {
 
     private GeneratorOptions buildGeneratorOptions() {
         GeneratorOptions opts = new GeneratorOptions();
-        opts.setSourceDirectory(options.getSource());
-//        opts.setAdditionalSource(options.getAdditionalSource());  // todo implement
+        opts.setSources(options.getSource());
+        opts.setAdditionalSources(options.getAdditionalSource());
         opts.setInclude(options.getInclude());
         opts.setExclude(options.getExclude());
         opts.setExportOutput(options.getOutput());

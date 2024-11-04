@@ -10,7 +10,9 @@ import java.util.Properties;
  */
 public class GeneratorOptions {
 
-    private List<File> sourceDirectory;
+    private List<File> sources;
+
+    private List<File> additionalSources;
 
     private List<String> include;
 
@@ -29,10 +31,6 @@ public class GeneratorOptions {
     private boolean expand;
 
     private File expanderProperties;
-
-    private Class<? extends MidPointObjectStore> objectStoreType;
-
-    private MidPointObjectStore objectStoreInstance;
 
     private Class<? extends TemplateEngineContextBuilder> templateEngineContextBuilder;
 
@@ -68,12 +66,20 @@ public class GeneratorOptions {
         this.exportOutput = exportOutput;
     }
 
-    public List<File> getSourceDirectory() {
-        return sourceDirectory;
+    public List<File> getAdditionalSources() {
+        return additionalSources;
     }
 
-    public void setSourceDirectory(List<File> sourceDirectory) {
-        this.sourceDirectory = sourceDirectory;
+    public void setAdditionalSources(List<File> additionalSources) {
+        this.additionalSources = additionalSources;
+    }
+
+    public List<File> getSources() {
+        return sources;
+    }
+
+    public void setSources(List<File> sources) {
+        this.sources = sources;
     }
 
     public void setInclude(List<String> include) {
@@ -82,14 +88,6 @@ public class GeneratorOptions {
 
     public void setExclude(List<String> exclude) {
         this.exclude = exclude;
-    }
-
-    public Class<? extends MidPointObjectStore> getObjectStoreType() {
-        return objectStoreType;
-    }
-
-    public void setObjectStoreType(Class<? extends MidPointObjectStore> objectStoreType) {
-        this.objectStoreType = objectStoreType;
     }
 
     public Class<? extends TemplateEngineContextBuilder> getTemplateEngineContextBuilder() {
@@ -137,13 +135,5 @@ public class GeneratorOptions {
 
     public void setExpanderProperties(File expanderProperties) {
         this.expanderProperties = expanderProperties;
-    }
-
-    public MidPointObjectStore getObjectStoreInstance() {
-        return objectStoreInstance;
-    }
-
-    public void setObjectStoreInstance(MidPointObjectStore objectStoreInstance) {
-        this.objectStoreInstance = objectStoreInstance;
     }
 }
