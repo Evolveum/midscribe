@@ -7,11 +7,11 @@
     <parent>
         <groupId>com.evolveum.midpoint</groupId>
         <artifactId>midpoint</artifactId>
-        <version>4.10-SNAPSHOT</version>
+        <version>4.9</version>
     </parent>
 
     <artifactId>midscribe</artifactId>
-    <version>4.10-SNAPSHOT</version>
+    <version>4.9-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <repositories>
