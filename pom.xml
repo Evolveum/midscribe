@@ -58,6 +58,36 @@
                 <artifactId>schema</artifactId>
                 <version>${midpoint.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.evolveum.prism</groupId>
+                <artifactId>prism-api</artifactId>
+                <version>${midpoint.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.evolveum.prism</groupId>
+                <artifactId>prism-impl</artifactId>
+                <version>${midpoint.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.evolveum.axiom</groupId>
+                <artifactId>axiom</artifactId>
+                <version>${midpoint.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.evolveum.commons</groupId>
+                <artifactId>concepts</artifactId>
+                <version>${midpoint.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.evolveum.commons</groupId>
+                <artifactId>util</artifactId>
+                <version>${midpoint.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.evolveum.commons</groupId>
+                <artifactId>test-ng</artifactId>
+                <version>${midpoint.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>org.asciidoctor</groupId>
