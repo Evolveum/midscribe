@@ -42,7 +42,7 @@
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 
-        <midpoint.version>${project.version}</midpoint.version>
+        <midpoint.version>4.9</midpoint.version>
 
         <asciidoctorj.version>3.0.0</asciidoctorj.version>
         <asciidoctorj.pdf.version>2.3.19</asciidoctorj.pdf.version>
@@ -56,6 +56,36 @@
             <dependency>
                 <groupId>com.evolveum.midpoint.infra</groupId>
                 <artifactId>schema</artifactId>
+                <version>${midpoint.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.evolveum.prism</groupId>
+                <artifactId>prism-api</artifactId>
+                <version>${midpoint.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.evolveum.prism</groupId>
+                <artifactId>prism-impl</artifactId>
+                <version>${midpoint.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.evolveum.axiom</groupId>
+                <artifactId>axiom</artifactId>
+                <version>${midpoint.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.evolveum.commons</groupId>
+                <artifactId>concepts</artifactId>
+                <version>${midpoint.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.evolveum.commons</groupId>
+                <artifactId>util</artifactId>
+                <version>${midpoint.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.evolveum.commons</groupId>
+                <artifactId>test-ng</artifactId>
                 <version>${midpoint.version}</version>
             </dependency>
 
