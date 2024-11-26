@@ -1,6 +1,8 @@
 package com.evolveum.midscribe;
 
 import com.evolveum.midscribe.generator.*;
+import com.evolveum.midscribe.generator.export.ExportFormat;
+import com.evolveum.midscribe.generator.export.HtmlExporter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.AssertJUnit;

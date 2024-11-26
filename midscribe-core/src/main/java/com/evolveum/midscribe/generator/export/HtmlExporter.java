@@ -1,4 +1,4 @@
-package com.evolveum.midscribe.generator;
+package com.evolveum.midscribe.generator.export;
 
 import org.asciidoctor.Asciidoctor;
 import org.asciidoctor.Options;

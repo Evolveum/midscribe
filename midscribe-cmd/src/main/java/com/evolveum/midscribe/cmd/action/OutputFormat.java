@@ -1,6 +1,6 @@
 package com.evolveum.midscribe.cmd.action;
 
-import com.evolveum.midscribe.generator.ExportFormat;
+import com.evolveum.midscribe.generator.export.ExportFormat;
 
 public enum OutputFormat {
 

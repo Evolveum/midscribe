@@ -2,6 +2,10 @@ package com.evolveum.midscribe.generator;
 
 import com.evolveum.midpoint.prism.PrismContext;
 import com.evolveum.midpoint.xml.ns._public.common.common_3.SchemaType;
+import com.evolveum.midscribe.generator.export.ExportFormat;
+import com.evolveum.midscribe.generator.export.Exporter;
+import com.evolveum.midscribe.generator.export.HtmlExporter;
+import com.evolveum.midscribe.generator.export.PdfExporter;
 import com.evolveum.midscribe.generator.store.DefaultObjectStore;
 import com.evolveum.midscribe.generator.store.GetOptions;
 import com.evolveum.midscribe.generator.store.InMemoryObjectStoreFactory;

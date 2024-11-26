@@ -1,5 +1,7 @@
 package com.evolveum.midscribe.generator;
 
+import com.evolveum.midscribe.generator.export.ExportFormat;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;

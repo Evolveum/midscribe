@@ -1,6 +1,4 @@
-package com.evolveum.midscribe.generator;
-
-import javax.swing.text.html.HTML;
+package com.evolveum.midscribe.generator.export;
 
 /**
  * Created by Viliam Repan (lazyman).

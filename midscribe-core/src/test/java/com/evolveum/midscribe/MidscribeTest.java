@@ -1,6 +1,6 @@
 package com.evolveum.midscribe;
 
-import com.evolveum.midscribe.generator.ExportFormat;
+import com.evolveum.midscribe.generator.export.ExportFormat;
 import com.evolveum.midscribe.generator.GeneratorOptions;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.Validate;
