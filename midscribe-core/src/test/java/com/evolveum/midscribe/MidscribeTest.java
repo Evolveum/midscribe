@@ -1,7 +1,7 @@
 package com.evolveum.midscribe;
 
-import com.evolveum.midscribe.generator.export.ExportFormat;
 import com.evolveum.midscribe.generator.GeneratorOptions;
+import com.evolveum.midscribe.generator.export.ExportFormat;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.Validate;
 import org.testng.AssertJUnit;
@@ -17,6 +17,17 @@ import java.util.List;
  * Created by Viliam Repan (lazyman).
  */
 public abstract class MidscribeTest {
+
+    protected GeneratorOptions prepareOptions(String name, ExportFormat format) {
+        GeneratorOptions opts = new GeneratorOptions();
+        opts.setSources(List.of(new File("./src/test/resources")));
+        opts.setInclude(List.of("objects/**/*.xml"));
+        opts.setAdocOutput(new File("./target/" + name + ".adoc"));
+        opts.setExportOutput(new File("./target/" + name + "." + format.toString().toLowerCase()));
+        opts.setExportFormat(format);
+
+        return opts;
+    }
 
     protected GeneratorOptions prepareOptions(String name) {
         GeneratorOptions opts = new GeneratorOptions();
