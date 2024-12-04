@@ -5,15 +5,16 @@ package com.evolveum.midscribe.generator.data;
  */
 public class Attribute {
 
-    private String name;
-    private String description;
-    private Object value;
+    private final String name;
+
+    private final String description;
+
+    private final Object value;
 
     private String type;
 
     public Attribute(String name, Object value) {
-        this.name = name;
-        this.value = value;
+        this(name, null, value);
     }
 
     public Attribute(String name, String description, Object value,String type) {

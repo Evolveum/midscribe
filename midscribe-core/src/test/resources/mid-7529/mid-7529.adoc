@@ -3,13 +3,6 @@
 |Capability
 |Options
 
-|activation
-a|
-* status:
-** attribute: *ri:dis*
-** disableValue: *true*
-** enableValue: *false*
-
 
 |activation
 a|
@@ -17,10 +10,6 @@ a|
 ** attribute: *ri:disabled*
 ** disableValue: *true*
 ** enableValue: *_EMPTY STRING_*, *false*
-
-
-|activation
-a|
 * lockoutStatus
 * status
 * validTo

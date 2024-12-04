@@ -1,15 +1,20 @@
 package com.evolveum.midscribe.generator;
 
+import com.evolveum.midscribe.generator.export.ExportFormat;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * Created by Viliam Repan (lazyman).
  */
-public class GenerateOptions {
+public class GeneratorOptions {
 
-    private List<File> sourceDirectory;
+    private List<File> sources;
+
+    private List<File> additionalSources;
 
     private List<String> include;
 
@@ -23,15 +28,11 @@ public class GenerateOptions {
 
     private File exportOutput;
 
-    private File properties;
+    private Properties properties;
 
     private boolean expand;
 
     private File expanderProperties;
-
-    private Class<? extends MidPointObjectStore> objectStoreType;
-
-    private MidPointObjectStore objectStoreInstance;
 
     private Class<? extends TemplateEngineContextBuilder> templateEngineContextBuilder;
 
@@ -67,12 +68,20 @@ public class GenerateOptions {
         this.exportOutput = exportOutput;
     }
 
-    public List<File> getSourceDirectory() {
-        return sourceDirectory;
+    public List<File> getAdditionalSources() {
+        return additionalSources;
     }
 
-    public void setSourceDirectory(List<File> sourceDirectory) {
-        this.sourceDirectory = sourceDirectory;
+    public void setAdditionalSources(List<File> additionalSources) {
+        this.additionalSources = additionalSources;
+    }
+
+    public List<File> getSources() {
+        return sources;
+    }
+
+    public void setSources(List<File> sources) {
+        this.sources = sources;
     }
 
     public void setInclude(List<String> include) {
@@ -81,14 +90,6 @@ public class GenerateOptions {
 
     public void setExclude(List<String> exclude) {
         this.exclude = exclude;
-    }
-
-    public Class<? extends MidPointObjectStore> getObjectStoreType() {
-        return objectStoreType;
-    }
-
-    public void setObjectStoreType(Class<? extends MidPointObjectStore> objectStoreType) {
-        this.objectStoreType = objectStoreType;
     }
 
     public Class<? extends TemplateEngineContextBuilder> getTemplateEngineContextBuilder() {
@@ -114,11 +115,11 @@ public class GenerateOptions {
         return exclude;
     }
 
-    public File getProperties() {
+    public Properties getProperties() {
         return properties;
     }
 
-    public void setProperties(File properties) {
+    public void setProperties(Properties properties) {
         this.properties = properties;
     }
 
@@ -136,13 +137,5 @@ public class GenerateOptions {
 
     public void setExpanderProperties(File expanderProperties) {
         this.expanderProperties = expanderProperties;
-    }
-
-    public MidPointObjectStore getObjectStoreInstance() {
-        return objectStoreInstance;
-    }
-
-    public void setObjectStoreInstance(MidPointObjectStore objectStoreInstance) {
-        this.objectStoreInstance = objectStoreInstance;
     }
 }

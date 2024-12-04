@@ -7,41 +7,47 @@
     <parent>
         <groupId>com.evolveum.midpoint</groupId>
         <artifactId>midscribe</artifactId>
-        <version>4.4-SNAPSHOT</version>
+        <version>4.10-SNAPSHOT</version>
     </parent>
 
     <artifactId>midscribe-core</artifactId>
 
     <dependencies>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
+            <groupId>com.evolveum.prism</groupId>
+            <artifactId>prism-api</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>jcl-over-slf4j</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>log4j-over-slf4j</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
+            <groupId>com.evolveum.commons</groupId>
+            <artifactId>util</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.asciidoctor</groupId>
+            <artifactId>asciidoctorj-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.asciidoctor</groupId>
             <artifactId>asciidoctorj</artifactId>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.asciidoctor</groupId>
             <artifactId>asciidoctorj-pdf</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>
@@ -69,6 +75,11 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.evolveum.commons</groupId>
+            <artifactId>test-ng</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

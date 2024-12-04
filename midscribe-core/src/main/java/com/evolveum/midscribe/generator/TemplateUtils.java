@@ -18,7 +18,7 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
 
-/*import javax.xml.bind.JAXBElement;*/
+import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import java.util.*;
 
@@ -76,7 +76,7 @@ public class TemplateUtils {
         return sb.toString();
     }
 
-    private static final int countSkipCharacters(String[] lines) {
+    private static int countSkipCharacters(String[] lines) {
         int count = 0;
 
         outer:
@@ -129,14 +129,6 @@ public class TemplateUtils {
         }
 
         List<Attribute> attributes = new ArrayList<>();
-        String type = "";
-        /*List<Element> list = new ArrayList<>();
-        XmlSchemaType xmlSchemaType = resource.getSchema();
-        if (xmlSchemaType != null){
-            SchemaDefinitionType schemaDefinitionType = xmlSchemaType.getDefinition();
-            list = schemaDefinitionType.getAny();
-            type = "unknown";
-        }*/
 
         for (Object obj : config.getAny()) {
             if (!(obj instanceof Element)) {
@@ -151,14 +143,7 @@ public class TemplateUtils {
                 value = "XML"; // todo improve, passwords, etc
             }
 
-            /*if (xmlSchemaType != null){
-                for (Element typeElement : list){
-                    Attr attr = typeElement.getAttributeNode(element.getLocalName());
-                    type = attr.getSchemaTypeInfo().getTypeName();
-                }
-            }*/
-
-            attributes.add(new Attribute(element.getLocalName(), null, value,type));
+            attributes.add(new Attribute(element.getLocalName(), null, value));
         }
 
         return attributes;
@@ -166,7 +151,6 @@ public class TemplateUtils {
 
     private static <T> T getConnectorConfiguration(ResourceType resource, Class<T> type) {
         ConnectorConfigurationType config = resource.getConnectorConfiguration();
-
         List configs = config.getAny();
         if (configs.isEmpty()) {
             return null;
@@ -451,6 +435,5 @@ public class TemplateUtils {
                     (Class) value.getClass(), false, false, true).toString();
             buffer.append("\n");
         }
-
     }
 }

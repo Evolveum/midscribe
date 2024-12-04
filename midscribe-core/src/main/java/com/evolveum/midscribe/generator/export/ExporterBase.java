@@ -1,5 +1,7 @@
-package com.evolveum.midscribe.generator;
+package com.evolveum.midscribe.generator.export;
 
+import com.evolveum.midscribe.generator.LogListener;
+import com.evolveum.midscribe.generator.MidscribeLogHandler;
 import org.asciidoctor.Asciidoctor;
 
 /**

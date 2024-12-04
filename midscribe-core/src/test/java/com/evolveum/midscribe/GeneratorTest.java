@@ -1,6 +1,8 @@
 package com.evolveum.midscribe;
 
 import com.evolveum.midscribe.generator.*;
+import com.evolveum.midscribe.generator.export.ExportFormat;
+import com.evolveum.midscribe.generator.export.HtmlExporter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.AssertJUnit;
@@ -21,9 +23,9 @@ public class GeneratorTest extends MidscribeTest {
 
     @Test
     public void generateExample() throws Exception {
-        GenerateOptions opts = prepareOptions("generateExample");
-        opts.setSourceDirectory(List.of(new File("./src/test/resources/objects")));
-        opts.getExclude().addAll(Arrays.asList(new String[]{"users/*.xml", "tasks/misc/*"}));
+        GeneratorOptions opts = prepareOptions("generateExample");
+        opts.setSources(List.of(new File("./src/test/resources/objects")));
+        opts.getExclude().addAll(Arrays.asList("users/*.xml", "tasks/misc/*"));
 
         Generator generator = new Generator(opts);
         generator.generate();
@@ -31,9 +33,9 @@ public class GeneratorTest extends MidscribeTest {
 
     @Test
     public void generatePdfExample() throws Exception {
-        GenerateOptions opts = prepareOptions("generatePdfExample");
-        opts.setSourceDirectory(List.of(new File("./src/test/resources/objects")));
-        opts.getExclude().addAll(Arrays.asList(new String[]{"users/*.xml", "tasks/misc/*"}));
+        GeneratorOptions opts = prepareOptions("generatePdfExample");
+        opts.setSources(List.of(new File("./src/test/resources/objects")));
+        opts.getExclude().addAll(Arrays.asList("users/*.xml", "tasks/misc/*"));
         opts.setExportFormat(ExportFormat.PDF);
 
         Generator generator = new Generator(opts);
@@ -42,9 +44,9 @@ public class GeneratorTest extends MidscribeTest {
 
     @Test
     public void generateWithCustomZipTemplate() throws Exception {
-        GenerateOptions opts = prepareOptions("generateWithCustomZipTemplate");
-        opts.setSourceDirectory(List.of(new File("./src/test/resources/objects")));
-        opts.getExclude().addAll(Arrays.asList(new String[]{"users/*.xml", "tasks/misc/*"}));
+        GeneratorOptions opts = prepareOptions("generateWithCustomZipTemplate");
+        opts.setSources(List.of(new File("./src/test/resources/objects")));
+        opts.getExclude().addAll(Arrays.asList("users/*.xml", "tasks/misc/*"));
         opts.setTemplate(new File("./src/test/resources/template.zip"));
 
         Generator generator = new Generator(opts);
@@ -53,8 +55,8 @@ public class GeneratorTest extends MidscribeTest {
 
     @Test
     public void generateWithCustomDirectoryTemplate() throws Exception {
-        GenerateOptions opts = prepareOptions("generateWithCustomDirectoryTemplate");
-        opts.getExclude().addAll(Arrays.asList(new String[]{"users/*.xml", "tasks/misc/*"}));
+        GeneratorOptions opts = prepareOptions("generateWithCustomDirectoryTemplate");
+        opts.getExclude().addAll(Arrays.asList("users/*.xml", "tasks/misc/*"));
         opts.setTemplate(new File("./src/test/resources/template-directory"));
 
         Generator generator = new Generator(opts);
@@ -81,9 +83,9 @@ public class GeneratorTest extends MidscribeTest {
 
     @Test
     public void generateHtmlWithCustomLogListener() throws Exception {
-        GenerateOptions opts = prepareOptions("generateHtmlWithCustomLogListener");
-        opts.setSourceDirectory(List.of(new File("./src/test/resources/objects")));
-        opts.setInclude(Arrays.asList("generateHtmlWithCustomLogListener.xml"));
+        GeneratorOptions opts = prepareOptions("generateHtmlWithCustomLogListener");
+        opts.setSources(List.of(new File("./src/test/resources/objects")));
+        opts.setInclude(List.of("generateHtmlWithCustomLogListener.xml"));
 
         List<String> messages = new ArrayList<>();
 
@@ -93,7 +95,7 @@ public class GeneratorTest extends MidscribeTest {
         generator.setLogListener(listener);
         generator.generate();
 
-        messages.forEach(m -> LOG.info(m));
+        messages.forEach(LOG::info);
 
         AssertJUnit.assertEquals(2, messages.size());
     }

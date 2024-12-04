@@ -1,7 +1,7 @@
 package com.evolveum.midscribe;
 
-import com.evolveum.midscribe.generator.ExportFormat;
-import com.evolveum.midscribe.generator.GenerateOptions;
+import com.evolveum.midscribe.generator.GeneratorOptions;
+import com.evolveum.midscribe.generator.export.ExportFormat;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.Validate;
 import org.testng.AssertJUnit;
@@ -11,7 +11,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -19,10 +18,21 @@ import java.util.List;
  */
 public abstract class MidscribeTest {
 
-    protected GenerateOptions prepareOptions(String name) {
-        GenerateOptions opts = new GenerateOptions();
-        opts.setSourceDirectory(List.of(new File("./src/test/resources")));
-        opts.setInclude(Arrays.asList("objects/**/*.xml"));
+    protected GeneratorOptions prepareOptions(String name, ExportFormat format) {
+        GeneratorOptions opts = new GeneratorOptions();
+        opts.setSources(List.of(new File("./src/test/resources")));
+        opts.setInclude(List.of("objects/**/*.xml"));
+        opts.setAdocOutput(new File("./target/" + name + ".adoc"));
+        opts.setExportOutput(new File("./target/" + name + "." + format.toString().toLowerCase()));
+        opts.setExportFormat(format);
+
+        return opts;
+    }
+
+    protected GeneratorOptions prepareOptions(String name) {
+        GeneratorOptions opts = new GeneratorOptions();
+        opts.setSources(List.of(new File("./src/test/resources")));
+        opts.setInclude(List.of("objects/**/*.xml"));
         opts.setAdocOutput(new File("./target/" + name + ".adoc"));
         opts.setExportOutput(new File("./target/" + name + ".html"));
         opts.setExportFormat(ExportFormat.HTML);

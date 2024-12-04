@@ -8,6 +8,15 @@ import org.testng.annotations.Test;
 public class CmdTest {
 
     @Test
+    public void help() {
+        String[] args = {
+                "-h"
+        };
+
+        MidScribeMain.main(args);
+    }
+
+    @Test
     public void generateHtml() {
         String[] args = {
                 "-v",

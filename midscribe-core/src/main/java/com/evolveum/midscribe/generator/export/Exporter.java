@@ -1,4 +1,6 @@
-package com.evolveum.midscribe.generator;
+package com.evolveum.midscribe.generator.export;
+
+import com.evolveum.midscribe.generator.LogListener;
 
 import java.io.File;
 import java.io.IOException;

@@ -10,7 +10,7 @@ import org.asciidoctor.log.LogRecord;
  */
 public class MidscribeLogHandler implements LogHandler {
 
-    private LogListener listener;
+    private final LogListener listener;
 
     public MidscribeLogHandler(LogListener listener) {
         Validate.notNull(listener, "Listener must not be null");

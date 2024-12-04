@@ -6,13 +6,17 @@ import com.evolveum.midpoint.schema.result.OperationResult;
 import com.evolveum.midpoint.util.LocalizableMessage;
 import com.evolveum.midpoint.util.exception.SchemaException;
 import com.evolveum.midpoint.xml.ns._public.common.common_3.*;
+import com.evolveum.midscribe.generator.store.GetOptions;
+import com.evolveum.midscribe.generator.store.ObjectStore;
 import com.evolveum.prism.xml.ns._public.types_3.RawType;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.xml.namespace.QName;
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
@@ -25,9 +29,7 @@ public class ProcessorUtils {
 
     private static final Logger LOG = LoggerFactory.getLogger(ProcessorUtils.class);
 
-    private static final String PROPERTY_PREFIX = "midscribe.";
-
-    private GeneratorContext context;
+    private final GeneratorContext context;
 
     private Properties properties = new Properties();
 
@@ -41,32 +43,9 @@ public class ProcessorUtils {
             LOG.error("Couldn't load midscribe.properties from classpath", ex);
         }
 
-        GenerateOptions opts = context.getConfiguration();
+        GeneratorOptions opts = context.getConfiguration();
         if (opts.getProperties() != null) {
-            File file = opts.getProperties();
-            if (!file.isFile() || !file.canRead()) {
-                LOG.error("Can't read file (not a regular file, doesn't exist, or access rights issue");
-            } else {
-                try (InputStream is = new FileInputStream(opts.getProperties())) {
-                    properties.load(new InputStreamReader(is, StandardCharsets.UTF_8));
-                } catch (IOException ex) {
-                    LOG.error("Couldn't load file {}, reason: {}", opts.getProperties(), ex.getMessage());
-                }
-            }
-        }
-
-        Properties system = System.getProperties();
-        for (Object obj : system.keySet()) {
-            if (!(obj instanceof String)) {
-                continue;
-            }
-
-            String key = (String) obj;
-            if (!key.startsWith(PROPERTY_PREFIX)) {
-                continue;
-            }
-
-            properties.put(key.replaceFirst(PROPERTY_PREFIX, ""), system.get(key));
+            properties.putAll(opts.getProperties());
         }
     }
 
@@ -84,7 +63,7 @@ public class ProcessorUtils {
             return ((RawType) object).extractString();
         }
 
-        PrismContext prismContext = context.getStore().getPrismContext();
+        PrismContext prismContext = context.getPrismContext();
 
         final QName fakeQName = new QName(PrismConstants.NS_TYPES, "object");
 
@@ -219,19 +198,18 @@ public class ProcessorUtils {
             return null;
         }
 
-        MidPointObjectStore store = context.getStore();
-        return store.get(type, oid);
+        ObjectStore store = context.getStore();
+        return store.get(type, oid, GetOptions.create());
     }
 
     private <T extends ObjectType> List<T> loadObjects(Class<T> type) throws Exception {
         List<T> objects = new ArrayList<>();
 
-        MidPointObjectStore store = context.getStore();
-        List<T> result = store.list(type);
-        if (result != null) {
-            objects.addAll(result);
-            Collections.sort(objects, new ObjectTypeComparator());
-        }
+        ObjectStore store = context.getStore();
+        List<T> result = store.list(type, GetOptions.create());
+
+        objects.addAll(result);
+        Collections.sort(objects, new ObjectTypeComparator());
 
         return objects;
     }

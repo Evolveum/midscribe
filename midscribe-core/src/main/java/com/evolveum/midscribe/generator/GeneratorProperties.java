@@ -6,13 +6,13 @@ import java.util.Map;
 /**
  * Created by Viliam Repan (lazyman).
  */
-public interface GeneratorProperties {
+public final class GeneratorProperties {
 
-    String VELOCITY_START_TEMPLATE = "velocity.start.template";
+    public static final String VELOCITY_START_TEMPLATE = "velocity.start.template";
 
-    String VELOCITY_START_TEMPLATE_DEFAULT = "/template/documentation.vm";
+    public static final String VELOCITY_START_TEMPLATE_DEFAULT = "/template/documentation.vm";
 
-    String VELOCITY_ADDITIONAL_VARIABLES = "velocity.additional.variables";
+    public static final String VELOCITY_ADDITIONAL_VARIABLES = "velocity.additional.variables";
 
-    Map<String, Object> VELOCITY_ADDITIONAL_VARIABLES_DEFAULT = new HashMap<>();
+    public static final Map<String, Object> VELOCITY_ADDITIONAL_VARIABLES_DEFAULT = new HashMap<>();
 }
