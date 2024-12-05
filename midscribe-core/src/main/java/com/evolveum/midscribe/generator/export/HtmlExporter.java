@@ -1,7 +1,7 @@
 package com.evolveum.midscribe.generator.export;
 
 import org.asciidoctor.Asciidoctor;
-import org.asciidoctor.AttributesBuilder;
+import org.asciidoctor.Attributes;
 import org.asciidoctor.Options;
 import org.asciidoctor.SafeMode;
 
@@ -29,13 +29,17 @@ public class HtmlExporter extends ExporterBase {
 
         File cssFile = new File(cssFilePath);
 
+        Attributes attributes = Attributes.builder()
+                .styleSheetName(cssFile.exists() && cssFile.length() > 0 ? cssFilePath : null)
+                .build();
+
         if (cssFile.exists() && cssFile.length() > 0) {
             Options options = Options.builder()
                     .safe(SafeMode.UNSAFE)
                     .toDir(dir)
                     .toFile(file)
-                    .headerFooter(true)
-                    .attributes(AttributesBuilder.attributes().styleSheetName(cssFilePath))
+                    .standalone(true)
+                    .attributes(attributes)
                     .build();
 
             Asciidoctor doctor = createAsciidoctor();
@@ -47,11 +51,12 @@ public class HtmlExporter extends ExporterBase {
                     .safe(SafeMode.UNSAFE)
                     .toDir(dir)
                     .toFile(file)
-                    .headerFooter(true)
+                    .standalone(true)
                     .build();
 
-        try (Asciidoctor doctor = createAsciidoctor()) {
-            doctor.convertFile(adocFile, options);
+            try (Asciidoctor doctor = createAsciidoctor()) {
+                doctor.convertFile(adocFile, options);
+            }
         }
     }
 }

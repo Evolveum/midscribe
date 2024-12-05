@@ -14,7 +14,7 @@ public class Attribute {
     private String type;
 
     public Attribute(String name, Object value) {
-        this(name, null, value);
+        this(name, null, value,null);
     }
 
     public Attribute(String name, String description, Object value,String type) {

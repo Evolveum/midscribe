@@ -44,7 +44,8 @@ public class TemplateUtilsTest extends MidscribeTest {
         variables.put("capabilities", capabilities);
 
         Properties props = new Properties();
-        props.setProperty(GeneratorProperties.VELOCITY_START_TEMPLATE, "/template/capabilities-native.vm");
+        props.setProperty(GeneratorProperties.VELOCITY_START_TEMPLATE, "/template/capabilities-configured.vm");
+        /*props.setProperty(GeneratorProperties.VELOCITY_START_TEMPLATE, "/template/capabilities-configured.vm");*/
         props.put(GeneratorProperties.VELOCITY_ADDITIONAL_VARIABLES, variables);
 
         Generator generator = new Generator(opts);

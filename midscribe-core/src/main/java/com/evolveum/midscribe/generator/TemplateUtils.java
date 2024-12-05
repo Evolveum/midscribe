@@ -18,7 +18,6 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import java.util.*;
 
@@ -143,7 +142,7 @@ public class TemplateUtils {
                 value = "XML"; // todo improve, passwords, etc
             }
 
-            attributes.add(new Attribute(element.getLocalName(), null, value));
+            attributes.add(new Attribute(element.getLocalName(), value));
         }
 
         return attributes;
