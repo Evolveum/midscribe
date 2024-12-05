@@ -12,8 +12,6 @@
                     <cap:enableValue>false</cap:enableValue>
                     <cap:disableValue>true</cap:disableValue>
                 </cap:status>
-                <cap:validTo/>
-                <cap:lockoutStatus/>
             </cap:activation>
             <cap:countObjects>
                 <cap:simulate>sequentialSearch</cap:simulate>

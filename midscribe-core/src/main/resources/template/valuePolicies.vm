@@ -1,0 +1,16 @@
+## FUNCTION LIBRARIES
+
+#set($valuePolicies=$processor.loadValuePolicies())
+
+#if(!$valuePolicies.isEmpty())
+
+== Value policies
+
+#set($objects=$valuePolicies)
+#parse("/template/objects-sumary-table.vm")
+
+#foreach($object in $valuePolicies)
+#parse("/template/valuePolicy.vm")
+#end
+
+#end

@@ -1,0 +1,194 @@
+## FUNCTION LIBRARIES
+
+== Notifications
+
+#set($sysConfig=$processor.loadSystemConfiguration())
+$sysConfig
+#foreach($sys in $sysConfig)
+
+#if(!$sys.isEmpty())
+
+#set($objects=$sys.getNotificationConfiguration().getHandler())
+#if($objects)
+
+[cols=3,options=header]
+|===
+|Handler name
+|Handler type
+|Transport
+
+#foreach($handler in $objects)
+
+|$!processor.translator($handler.name)
+#if($handler.simpleUserNotifier)
+|simpleUserNotifier
+|$!processor.translator($handler.getSimpleUserNotifier().get(0).transport)
+#elseif($handler.simpleWorkflowNotifier)
+|simpleWorkflowNotifier
+|$!processor.translator($handler.getSimpleWorkflowNotifier().get(0).transport)
+#elseif($handler.simpleCampaignNotifier)
+|simpleCampaignNotifier
+|$!processor.translator($handler.getSimpleCampaignNotifier().get(0).transport)
+#elseif($handler.simpleCampaignStageNotifier)
+|simpleCampaignStageNotifier
+|$!processor.translator($handler.getSimpleCampaignStageNotifier().get(0).transport)
+#elseif($handler.simpleCaseManagementNotifier)
+|simpleCaseManagementNotifier
+|$!processor.translator($handler.getSimpleCaseManagementNotifier().get(0).transport)
+#elseif($handler.simpleFocalObjectNotifier)
+|simpleFocalObjectNotifier
+|$!processor.translator($handler.getSimpleFocalObjectNotifier().get(0).transport)
+#elseif($handler.simplePolicyRuleNotifier)
+|simplePolicyRuleNotifier
+|$!processor.translator($handler.getSimplePolicyRuleNotifier().get(0).transport)
+#elseif($handler.simpleReportNotifier)
+|simpleReportNotifier
+|$!processor.translator($handler.getSimpleReportNotifier().get(0).transport)
+#elseif($handler.simpleResourceObjectNotifier)
+|simpleResourceObjectNotifier
+|$!processor.translator($handler.getSimpleResourceObjectNotifier().get(0).transport)
+#elseif($handler.simpleReviewerNotifier)
+|simpleReviewerNotifier
+|$!processor.translator($handler.getSimpleReviewerNotifier().get(0).transport)
+#elseif($handler.simpleTaskNotifier)
+|simpleTaskNotifier
+|$!processor.translator($handler.getSimpleTaskNotifier().get(0).transport)
+#elseif($handler.timeValidityNotifier)
+|timeValidityNotifier
+|$!processor.translator($handler.getTimeValidityNotifier().get(0).transport)
+#elseif($handler.userPasswordNotifier)
+|userPasswordNotifier
+|$!processor.translator($handler.getUserPasswordNotifier().get(0).transport)
+#elseif($handler.userRegistrationNotifier)
+|userRegistrationNotifier
+|$!processor.translator($handler.getUserRegistrationNotifier().get(0).transport)
+#elseif($handler.accountActivationNotifier)
+|accountActivationNotifier
+|$!processor.translator($handler.getAccountActivationNotifier().get(0).transport)
+#elseif($handler.accountPasswordNotifier)
+|accountPasswordNotifier
+|$!processor.translator($handler.getAccountPasswordNotifier().get(0).transport)
+#elseif($handler.customNotifier)
+|customNotifier
+|$!processor.translator($handler.getCustomNotifier().get(0).transport)
+#elseif($handler.generalNotifier)
+|generalNotifier
+|$!processor.translator($handler.getGeneralNotifier().get(0).transport)
+#elseif($handler.passwordResetNotifier)
+|passwordResetNotifier
+|$!processor.translator($handler.getPasswordResetNotifier().get(0).transport)
+#else
+|OtherNotifier
+#end
+
+#end
+|===
+#end
+
+#if($objects && $processor.getProperty("project.expressionEnabled") == "true")
+#parse("/template/notification.vm")
+#end
+
+== Message transport configuration
+
+#set($transportConfig=$sys.getMessageTransportConfiguration())
+
+#if($transportConfig)
+#if($transportConfig.getMail())
+=== Mail transport
+#foreach($mail in $transportConfig.getMail())
+**$mail.getName()**
+#if($mail.getDefaultFrom())
+Default from : $mail.getDefaultFrom() +
+#end
+
+#foreach($server in $mail.getServer())
+[cols=2,options=header]
+|===
+|Parameter
+|Value
+
+#if($server.getUsername())
+|username
+|$server.getUsername()
+#end
+#if($server.getHost())
+|host
+|$server.getHost()
+#end
+#if($server.getPort())
+|port
+|$server.getPort()
+#end
+#if($server.getTransportSecurity())
+|transport security
+|$server.getTransportSecurity().value()
+#end
+
+|===
+#end
+#end
+#end
+
+#if($transportConfig.getSms())
+=== Sms transport
+#foreach($sms in $transportConfig.getSms())
+**$sms.getName()** +
+#if($sms.getDefaultFrom())
+Default from : $sms.getDefaultFrom() +
+#end
+#foreach($gateway in $sms.getGateway())
+[cols=2,options=header]
+|===
+|Parameter
+|Value
+
+#if($gateway.getUsername())
+|username
+|$gateway.getUsername()
+#end
+#if($gateway.getProxyHost())
+|proxy host
+|$gateway.getProxyHost()
+#end
+#if($gateway.getProxyPort())
+|proxy port
+|$gateway.getProxyPort()
+#end
+#if($gateway.getMethod())
+|transport security
+|$gateway.getMethod().value()
+#end
+
+|===
+#end
+#end
+#end
+
+#if($transportConfig.getFile())
+=== File transport
+#foreach($file in $transportConfig.getFile())
+**$file.getName()** +
+#if($file.getFile())
+File : $file.getFile() +
+#end
+#end
+#end
+
+#if($transportConfig.getCustomTransport())
+=== Custom transport
+#foreach($custom in $transportConfig.getCustomTransport())
+**$custom.getName()** +
+#if($custom.getType())
+Type : $custom.getType() +
+#end
+[source,xml,indent=0,subs="verbatim,attributes",role="primary"]
+.Expression
+----
+$utils.stripIndent($processor.serialize($custom.getExpression()))
+----
+#end
+#end
+#end
+#end
+#end

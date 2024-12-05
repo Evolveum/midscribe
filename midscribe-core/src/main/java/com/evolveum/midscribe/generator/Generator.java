@@ -145,8 +145,10 @@ public class Generator {
         File adocOutput = options.getAdocOutput();
         File exportOutput = options.getExportOutput();
 
+
         if (exportOutput == null) {
             exportOutput = new File(adocOutput.getParent(), adocOutput.getName() + "." + exporter.getDefaultExtension());
+
         }
 
         return createFile(exportOutput);
@@ -155,11 +157,14 @@ public class Generator {
     private File createAdocFile() throws IOException {
         File adocOutput = options.getAdocOutput();
         File exportOutput = options.getExportOutput();
-
+        LOG.info("ExportOutput creation started");
         if (adocOutput == null) {
+            LOG.info("ExportOutput trying to create");
             adocOutput = new File(exportOutput.getParent(), exportOutput.getName() + ADOC_EXTENSION);
+            LOG.info("ExportOutput creation finished");
         }
 
+        LOG.info("ExportOutput creation skipped");
         return createFile(adocOutput);
     }
 

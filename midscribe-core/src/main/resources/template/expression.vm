@@ -1,3 +1,4 @@
+#if ($processor.getProperty("project.expressionEnabled") == "true")
 ## main object: $expression (ExpressionType)
 
 $!expression.getDescription()
@@ -31,27 +32,18 @@ $!utils.stripIndent($expression.getDocumentation())
 
 #set($value = $expression.getExpressionEvaluator().get(0).getValue())
 
-[indent=0,subs="verbatim,attributes",role="primary"]
-.${value.getClass().getSimpleName().replaceFirst("ExpressionEvaluatorType", "").replaceFirst("RawType", "Value")}
-----
-$!value.getDescription()
-
-$!utils.stripIndent($value.getDocumentation())
-
-Relativity: $!value.getRelativityMode()
-Include null inputs: $!value.isIncludeNullInputs()
-----
-
 #if($value.getClass().getSimpleName() == "ScriptExpressionEvaluatorType")
-[source,groovy,indent=0,subs="verbatim,attributes",role="secondary"]
+[source,groovy,indent=0,subs="verbatim,attributes",role="primary"]
 .Groovy
 ----
 $utils.stripIndent($value.getCode())
 ----
+
 #else
-[source,xml,indent=0,subs="verbatim,attributes",role="secondary"]
+[source,xml,indent=0,subs="verbatim,attributes",role="primary"]
 .XML
 ----
 $utils.stripIndent($processor.serialize($value))
 ----
+#end
 #end

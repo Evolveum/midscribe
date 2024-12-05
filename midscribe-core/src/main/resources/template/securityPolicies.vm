@@ -1,0 +1,16 @@
+## FUNCTION LIBRARIES
+
+#set($securityPolicies=$processor.loadSecurityPolicies())
+
+#if(!$securityPolicies.isEmpty())
+
+== Security policies
+
+#set($objects=$securityPolicies)
+#parse("/template/objects-sumary-table.vm")
+
+#foreach($object in $securityPolicies)
+#parse("/template/securityPolicy.vm")
+#end
+
+#end
