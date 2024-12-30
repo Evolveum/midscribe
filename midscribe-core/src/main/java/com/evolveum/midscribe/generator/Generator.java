@@ -136,7 +136,7 @@ public class Generator {
             return exporter;
         } catch (NoSuchMethodException | InvocationTargetException | InstantiationException |
                  IllegalAccessException ex) {
-            LOG.error("Couldn't create formatter of type " + clazz);
+            LOG.error("Couldn't create formatter of type {}", clazz);
             return null;
         }
     }
@@ -169,7 +169,7 @@ public class Generator {
     }
 
     private File createFile(File file) throws IOException {
-        LOG.debug("Creating file " + file.getAbsolutePath());
+        LOG.debug("Creating file {}", file.getAbsolutePath());
 
         if (file.exists()) {
             file.delete();
