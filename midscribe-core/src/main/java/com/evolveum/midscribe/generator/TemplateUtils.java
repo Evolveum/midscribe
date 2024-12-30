@@ -1,18 +1,23 @@
 package com.evolveum.midscribe.generator;
 
+import com.evolveum.midpoint.prism.xnode.MapXNode;
+import com.evolveum.midpoint.prism.xnode.XNode;
 import com.evolveum.midpoint.xml.ns._public.common.common_3.*;
 import com.evolveum.midpoint.xml.ns._public.connector.icf_1.connector_schema_3.ConfigurationPropertiesType;
 import com.evolveum.midpoint.xml.ns._public.connector.icf_1.connector_schema_3.ResultsHandlerConfigurationType;
 import com.evolveum.midpoint.xml.ns._public.resource.capabilities_3.CapabilityType;
 import com.evolveum.midscribe.generator.data.Attribute;
+import com.evolveum.prism.xml.ns._public.query_3.SearchFilterType;
 import com.evolveum.prism.xml.ns._public.types_3.PolyStringType;
+import com.evolveum.prism.xml.ns._public.types_3.SchemaDefinitionType;
+import jakarta.xml.bind.JAXBElement;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
 
-import jakarta.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import java.util.*;
 
@@ -137,7 +142,7 @@ public class TemplateUtils {
                 value = "XML"; // todo improve, passwords, etc
             }
 
-            attributes.add(new Attribute(element.getLocalName(), null, value));
+            attributes.add(new Attribute(element.getLocalName(), value));
         }
 
         return attributes;
@@ -168,7 +173,89 @@ public class TemplateUtils {
         return null;
     }
 
-    private static Map<String, String> getConnectorConfigurationDescription(ResourceType resource) {
+    private static String getConnectorConfigurationDescription(ResourceType resource,String attrName) {
+        XmlSchemaType xmlSchemaType = resource.getSchema() ;
+        if (xmlSchemaType == null || xmlSchemaType.getDefinition() == null) {
+            return "unknown";
+        }
+
+        List<Element> list = xmlSchemaType.getDefinition().getAny();
+        String result = "test";
+        if (!list.isEmpty()){
+            for (Element element: list) {
+                if (element.getLocalName() == attrName){
+                    result = element.getSchemaTypeInfo().getTypeName();
+                } else {
+                    result = "not equal but comparing with this"+ element.getLocalName();
+                }
+            }
+        } else {
+            result = "list is empty";
+        }
+
+        return result;
+    }
+/*$object.getConnectorRef().getFilter().getFilterClauseXNode().get("and").get("equal").get(0)
+    private static List<String> getConnectorInformations(SearchFilterType searchFilterType) {
+        MapXNode mapXNode = searchFilterType.getFilterClauseXNode();
+        QName qName = new QName("and");
+        if (!mapXNode.isEmpty()){
+            mapXNode.get(qName).get("equal").get(0);
+        }
+    }*/
+
+    public static String findIndices(XNode input) {
+        if (input == null){
+            return null;
+        }
+        String string = input.toString();
+        int[] indices = new int[2];
+        int startIndex = string.indexOf(",", 0) + 1;
+        int endIndex = string.indexOf(", ", startIndex + 1);
+
+        indices[0] = startIndex;
+        indices[1] = endIndex;
+
+        return string.substring(startIndex,endIndex);
+    }
+
+    public static List<String> getAssignmentInformation(String input) {
+        ArrayList<String> arrayList = new ArrayList<>();
+
+        if (input == null || input.isEmpty()) {
+            arrayList.add("");
+            return arrayList;
+        }
+
+        int relationIndex = input.indexOf("relation=");
+        String relation = input.substring(relationIndex + "relation=".length(), input.indexOf(")", relationIndex)).trim();
+
+
+        int typeIndex = input.indexOf("targetType=");
+        String type = input.substring(typeIndex + "targetType=".length(), input.indexOf(",", typeIndex)).trim();
+        int startIndex = type.lastIndexOf("}") + 1;
+        String typeName = type.substring(startIndex, type.length());
+
+        int oidIndex = input.indexOf("oid=");
+        String oid = input.substring(oidIndex + "oid=".length(), input.indexOf(",", oidIndex)).trim();
+
+        // Similar checks for targetType and oid
+
+        // Add "ArchetypeType" regardless of whether other values were found or not
+        arrayList.add(relation);
+        arrayList.add(typeName);
+        arrayList.add(oid);
+
+        return arrayList;
+    }
+
+    /*public static String getLimitation(String input) {
+        ObjectTemplateItemDefinitionType objectTemplateItemDefinitionType = new ObjectTemplateItemDefinitionType();
+        objectTemplateItemDefinitionType.limitations(new PropertyLimitationsType());
+
+        return
+    }*/
+    private static Map<String, String> getResourceAttributeType(ResourceType resource,String attrName) {
         ObjectReferenceType connectorRef = resource.getConnectorRef();
         if (connectorRef == null || connectorRef.getOid() == null) {
             return new HashMap<>();

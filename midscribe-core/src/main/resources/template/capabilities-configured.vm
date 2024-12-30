@@ -1,0 +1,77 @@
+## main object: $capabilities (CapabilityCollectionType)
+[cols=2,options=header]
+|===
+|Capability
+|Options
+
+#if($capabilities.getSchema())
+|Schema
+a|isEnabled : **$capabilities.getSchema().isEnabled()**
+#end
+
+#if($capabilities.getLiveSync())
+|LiveSync
+a|isEnabled : **$capabilities.getLiveSync().isEnabled()**
+#end
+
+#if($capabilities.getRead())
+|Read
+a|isEnabled : **$capabilities.getRead().isEnabled()**
+#end
+
+#if($capabilities.getUpdate())
+|Update
+a|isAddRemoveAttributeValues : **$capabilities.getUpdate().isAddRemoveAttributeValues()** +
+#if($capabilities.getUpdate().isDelta())
+isDelta : **$capabilities.getUpdate().isDelta()** +
+#else
+isDelta : **false** +
+#end
+isEnabled : **$capabilities.getUpdate().isEnabled()** +
+#end
+
+#if($capabilities.getTestConnection())
+|TestConnection
+a|isEnabled : **$capabilities.getTestConnection().isEnabled()**
+#end
+
+#if($capabilities.getScript())
+|Script
+a|host type : **$host.getType().isEnabled()**
+#end
+
+#if($capabilities.getCountObjects())
+|CountObjects
+a|isEnabled : **$capabilities.getCountObjects().isEnabled()**
+#end
+
+#if($capabilities.getCreate())
+|Create
+a|isEnabled : **$capabilities.getCreate().isEnabled()**
+#end
+
+#if($capabilities.getCredentials())
+|Credentials
+a|isEnabled : **$capabilities.getCredentials().isEnabled()**
+#end
+
+#if($capabilities.getDelete())
+|Delete
+a|isEnabled : **$capabilities.getDelete().isEnabled()**
+#end
+
+#if($capabilities.getDiscoverConfiguration())
+|DiscoverConfiguration
+a|isEnabled : **$capabilities.getDiscoverConfiguration().isEnabled()**
+#end
+
+#if($capabilities.getPagedSearch())
+|PagedSearch
+a|isEnabled : **$capabilities.getPagedSearch().isEnabled()**
+#end
+
+#if($capabilities.getRunAs())
+|RunAs
+a|isEnabled : **$capabilities.getRunAs().isEnabled()**
+#end
+|===

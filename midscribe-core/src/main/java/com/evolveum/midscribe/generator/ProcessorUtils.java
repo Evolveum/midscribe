@@ -90,8 +90,37 @@ public class ProcessorUtils {
         return properties.getProperty(key);
     }
 
+    public String translator(String placeholder) {
+        if (placeholder != null && placeholder.startsWith("$(") && placeholder.endsWith(")")) {
+            String key = placeholder.substring(2, placeholder.length() - 1);
+            String value = properties.getProperty(key);
+            if (value != null){
+                return value;
+            }
+        } else {
+            return placeholder;
+        }
+        return placeholder;
+    }
+
     public List<UserType> loadUsers() throws Exception {
         return loadObjects(UserType.class);
+    }
+
+    public List<ArchetypeType> loadArchetypes() throws Exception {
+        return loadObjects(ArchetypeType.class);
+    }
+
+    public List<ValuePolicyType> loadValuePolicies() throws Exception {
+        return loadObjects(ValuePolicyType.class);
+    }
+
+    public List<SecurityPolicyType> loadSecurityPolicies() throws Exception {
+        return loadObjects(SecurityPolicyType.class);
+    }
+
+    public List<SystemConfigurationType> loadSystemConfiguration() throws Exception {
+        return loadObjects(SystemConfigurationType.class);
     }
 
     public List<LookupTableType> loadLookupTables() throws Exception {

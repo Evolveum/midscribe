@@ -1,0 +1,60 @@
+[[oid_$object.getOid()]]
+=== $!processor.translator($!utils.getOrig($object.getName()))
+Object OID : **$object.getOid()**
+
+$!processor.translator($!object.getDescription())
+
+$!processor.translator($!utils.stripIndent($object.getDocumentation()))
+#set($password = $object.getCredentials().getPassword())
+#if($password)
+**Credentials - password**
+
+[cols=2,options=header]
+|===
+|Parameter
+|Value
+
+|name
+#if ($password.name)
+|$!processor.translator($password.name)
+#else
+| default
+#end
+
+|minOccurs
+#if ($password.minOccurs)
+|$!processor.translator($password.minOccurs)
+#else
+| default
+#end
+
+|lockoutMaxFailedAttempts
+#if ($password.lockoutMaxFailedAttempts)
+|$!processor.translator($password.lockoutMaxFailedAttempts)
+#else
+| default
+#end
+
+|lockoutFailedAttemptsDuration
+#if ($password.lockoutFailedAttemptsDuration)
+|$!processor.translator($password.lockoutFailedAttemptsDuration)
+#else
+| default
+#end
+
+|lockoutDuration
+#if ($password.lockoutDuration)
+|$!processor.translator($password.lockoutDuration)
+#else
+| default
+#end
+
+|valuePolicyRef
+#if ($password.valuePolicyRef)
+|<<oid_$!processor.translator($password.valuePolicyRef.getOid()),**$!processor.translator($password.valuePolicyRef.getOid())**>>
+#else
+| default
+#end
+
+|===
+#end

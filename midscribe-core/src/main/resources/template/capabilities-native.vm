@@ -1,0 +1,65 @@
+#*## main object: $capabilities (CapabilityCollectionType)
+[cols=2,options=header]
+|===
+|Capability
+|Options
+
+#foreach($jaxb in $capabilities.getAny())
+#set($capability = $jaxb.getValue())
+|$jaxb.getName().getLocalPart()
+a|$utils.describeCapability($capability)
+
+#end
+|===*#
+
+## main object: $capabilities (CapabilityCollectionType)
+[cols=2,options=header]
+|===
+|Capability
+|Options
+
+#if($capabilities.getLiveSync().isPreciseTokenValue() == "false" || $capabilities.getLiveSync().isPreciseTokenValue() == "true")
+|LiveSync
+a|isPreciseTokenValue : **$capabilities.getLiveSync().isPreciseTokenValue()**
+#end
+
+#if($capabilities.getRead().isReturnDefaultAttributesOption() == "false" || $capabilities.getRead().isReturnDefaultAttributesOption() == "true")
+|Read
+a|isReturnDefaultAttributesOption : **$capabilities.getRead().isReturnDefaultAttributesOption()**
+#end
+
+#if($capabilities.getUpdate())
+|Update
+a|
+#if($capabilities.getUpdate().isAddRemoveAttributeValues() == "false" || $capabilities.getUpdate().isAddRemoveAttributeValues() == "true")
+isAddRemoveAttributeValues : **$capabilities.getUpdate().isAddRemoveAttributeValues()** +
+#end
+#if($capabilities.getUpdate().isDelta() == "false" || $capabilities.getUpdate().isDelta() == "true")
+isDelta : **$capabilities.getUpdate().isDelta()** +
+#end
+#end
+
+#if($capabilities.getTestConnection().isEnabled() == "false" || $capabilities.getTestConnection().isEnabled() == "true")
+|TestConnection
+a|isEnabled : **$capabilities.getTestConnection().isEnabled()**
+#end
+
+#if($capabilities.getScript().getHost())
+|Script
+a|host type :
+#foreach($host in $capabilities.getScript().getHost())
+ **$host.getType().value()** +
+#end
+#end
+
+#if($capabilities.getCredentials().getPassword())
+|Credentials
+a|returnedByDefault : **$capabilities.getCredentials().getPassword().isReturnedByDefault()**
+#end
+
+#if($capabilities.getPagedSearch().getDefaultSortField())
+|PagedSearch
+a|defaultSortField : **$capabilities.getPagedSearch().getDefaultSortField()**
+#end
+
+|===
