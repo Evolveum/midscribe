@@ -26,14 +26,19 @@ public class MidscribeLogHandler implements LogHandler {
 
         LogListener.Level level = LogListener.Level.getLevelBySeverity(logRecord.getSeverity());
 
-        LogListener.MessageDetails details = new LogListener.MessageDetails(
-                cursor.getLineNumber(),
-                cursor.getPath(),
-                cursor.getDir(),
-                cursor.getFile(),
-                sourceFileName,
-                sourceMethodName
-        );
+        LogListener.MessageDetails details;
+        if (cursor == null) {
+            details = new LogListener.MessageDetails(sourceFileName, sourceMethodName);
+        } else {
+            details = new LogListener.MessageDetails(
+                    cursor.getLineNumber(),
+                    cursor.getPath(),
+                    cursor.getDir(),
+                    cursor.getFile(),
+                    sourceFileName,
+                    sourceMethodName
+            );
+        }
 
         listener.log(level, logRecord.getMessage(), details);
     }
