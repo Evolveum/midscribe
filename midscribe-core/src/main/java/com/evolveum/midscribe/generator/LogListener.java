@@ -48,7 +48,7 @@ public interface LogListener {
 
     class MessageDetails {
 
-        private final int lineNumber;
+        private final Integer lineNumber;
 
         private final String path;
 
@@ -60,7 +60,13 @@ public interface LogListener {
 
         private final String sourceMethodName;
 
-        public MessageDetails(int lineNumber, String path, String dir, String file, String sourceFileName, String sourceMethodName) {
+        public MessageDetails(String sourceFileName, String sourceMethodName) {
+            this(null, null, null, null, sourceFileName, sourceMethodName);
+        }
+
+        public MessageDetails(
+                Integer lineNumber, String path, String dir, String file, String sourceFileName, String sourceMethodName) {
+
             this.lineNumber = lineNumber;
             this.path = path;
             this.dir = dir;
